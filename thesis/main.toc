@@ -1,0 +1,208 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Primary Motivation: Polynomials Applied to Neural Networks}{2}{section.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Generalization to Additional Motivating Applications}{4}{section.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.1}Traveling Ocean Wave Example}{4}{subsection.1.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.2}Nonlinear Amplifier Example}{4}{subsection.1.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.3}Additional Related Work}{5}{section.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.1}Neural Network Test and Verification}{5}{subsection.1.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.2}Neural Network Equivalency Testing}{6}{subsection.1.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.3}Neural Network Interpretability and Explainability}{6}{subsection.1.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.4}Neural Network Replication Attack and Defense}{7}{subsection.1.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.4}Main Contributions}{7}{section.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Definitions and Setup}{11}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Nonlinear Functions and Expansion Forms}{11}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Application to MLP Equivalence Testing}{13}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.1}Definitions}{13}{subsection.2.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.2}Assumptions}{14}{subsection.2.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Analytically Modified Integral Transform Expansion Technique}{17}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}General Expansion Technique}{17}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Alternate Taylor Series Derivations}{18}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.1}Hyperbolic Secant}{18}{subsection.3.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.2}Hyperbolic Tangent}{19}{subsection.3.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.3}Hyperbolic Secant Squared}{19}{subsection.3.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Modifying the Limits of Integration}{20}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}An Improved Hyperbolic Secant Expansion}{21}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}An Improved Hyperbolic Tangent Expansion}{22}{section.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}An Improved Hyperbolic Secant Squared Expansion}{23}{section.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.7}An Improved ReLU Expansion}{24}{section.3.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.8}Full Single Hidden Layer MLP Expansion}{25}{section.3.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.9}Expansion Results}{25}{section.3.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Case Study: Application to MLP Conformance Testing}{33}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Application Description and Problem Setup}{34}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}MLP Conformance Test Steps}{35}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Experiment Group A: Small MLPs}{37}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}Method and Experiment Setup}{37}{subsection.4.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.2}Results}{38}{subsection.4.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Stimulus and Response Signals}{38}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Testing the Conformance Test}{38}{section*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Conformance Testing a Population of Networks}{41}{section*.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.4}Experiment Group B: Larger MLPs}{43}{section.4.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4.1}Method and Experiment Setup}{43}{subsection.4.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4.2}Results}{45}{subsection.4.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Additional Case Studies}{49}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Application to Shallow Water Waves}{49}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.1}Setup}{49}{subsection.5.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.2}Solution}{50}{subsection.5.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.3}Results}{50}{subsection.5.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Application to Nonlinear Circuit Analysis}{50}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2.1}Setup}{50}{subsection.5.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2.2}Problem 1: Unbiased Nonlinear Amplifier}{53}{subsection.5.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Solution}{53}{section*.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Results}{54}{section*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2.3}Problem 2: Output Bias of a Nonlinear Amplifier}{54}{subsection.5.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Solution}{57}{section*.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Results}{58}{section*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Future Work: Addressing the Depths of Nested Nonlinearity}{63}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Motivations for Addressing Nested Nonlinearity}{63}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Mathematical Approach}{65}{section.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Future Studies}{68}{section.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.1}Neural Systems Verification}{68}{subsection.6.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.2}Neural Network Interpretability and Explainability}{69}{subsection.6.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.3}Scalability for Analysis of Larger Networks}{70}{subsection.6.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.4}Waves and Radar Clutter Analysis}{71}{subsection.6.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.5}Nonlinear Circuit Design and Analysis}{72}{subsection.6.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.6}Fundamental Mathematical Studies in Function Approximation}{72}{subsection.6.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Conclusion}{75}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{79}{section*.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Appendices}{93}{section*.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A}Hypergeometric Form of Taylor Expansion Errors For Sine and Cosine}{95}{section.a..1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {B}Useful Integral Representation of the Absolute Value Function}{96}{section.a..2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.1}For the Case of Both Limits at Infinity}{97}{subsection.a..2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.2}For the Case of Limits at Zero and Infinity}{98}{subsection.a..2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C}Detailed Derivations of the Expansions}{99}{section.a..3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.1}A Useful Integral}{99}{subsection.a..3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.2}Hyperbolic Secant}{100}{subsection.a..3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.3}Hyperbolic Tangent}{101}{subsection.a..3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {C.4}Hyperbolic Secant Squared}{101}{subsection.a..3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {D}Detailed Derivations of the Expansion Errors}{103}{section.a..4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {D.1}Hyperbolic Secant}{103}{subsection.a..4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {D.2}Hyperbolic Tangent}{105}{subsection.a..4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {E}Useful Special Function Relations}{107}{section.a..5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.1}Primary Definitions}{107}{subsection.a..5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Gamma Function and Extended Factorials}{107}{section*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Inverse Tangent Integral and Legendre's Chi Function}{107}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Generalized Hypergeometric and Meijer-G Functions}{108}{section*.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.2}Basic Trigonometric and Hyperbolic Relationships}{108}{subsection.a..5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.3}Taylor Series of Some Hyperbolic Functions}{108}{subsection.a..5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.4}Some Trigonometric Integrals and Identities}{109}{subsection.a..5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Rational Functions of the Cosine}{109}{section*.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Useful Limits}{109}{section*.18}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Useful Identities}{109}{section*.19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.5}Partial Sums of Some Trigonometric Functions}{110}{subsection.a..5.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.6}Connections Between the Polylogarithms and the Hyperbolic Secant}{110}{subsection.a..5.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.7}Hyperbolic and Power Function Products}{110}{subsection.a..5.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{In Terms of a Difference of Polylogarithms:}{111}{section*.20}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{In Terms of the Generalized Hypergeometric Functions:}{111}{section*.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{In Terms of the Inverse Tangent Integral and the Legendre Chi:}{111}{section*.22}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.8}Repeated Integrals and Derivatives}{112}{subsection.a..5.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Repeated Integration and Differentiation of Polynomials}{112}{section*.23}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Repeated Integration and Differentiation of Polylogarithms of Exponentials}{112}{section*.24}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Repeated Integration and Differentiation of the Hyperbolic Secant}{112}{section*.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {E.9}Integrals of Polylogarithm and Power Function Products}{112}{subsection.a..5.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Identities}{113}{section*.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Proof}{113}{section*.27}%

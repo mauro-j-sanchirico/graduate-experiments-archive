@@ -1,0 +1,288 @@
+\chapter{Introduction}
+
+\label{chapter_introduction}
+
+In the design and study of nonlinear systems, polynomial expansions provide an important means of decomposing nonlinear functions into a form facilitating analysis.  Various methods of polynomial expansion are part of the fundamental canon of classical analytical and modern numerical mathematical techniques.  Recently, in the study of neural networks, polynomial expansions have been applied to address well-known difficulties in the verifiable, explainable, and secure deployment thereof.  These studies on neural network verification, explainability, and security serve as the main motivating examples driving the development of a novel and improved expansion method.  More generally, polynomial expansions are often employed to facilitate analytical computations, e.g., in the solution of integral equations and the rigorous analysis of the systems they describe.
+
+This thesis presents a generalized novel polynomial expansion technique motivated by recent work in state of the art neural network research and gaps in the state of the art for applicable polynomial expansions before demonstrating use of the new expansion in a main case study in the analysis of neural networks and in additional case studies in the analysis of shallow water nonlinear waves and nonlinear circuits such as non-ideal amplifiers.  The expansion technique is thereby shown to facilitate detailed and exact analysis of the broad class of soft-clip and hard-clip nonlinear functions ubiquitous in the study of such systems.  Specific derivations applying the technique to the hyperbolic tangent, hyperbolic secant, hyperbolic secant squared, and rectified linear unit (ReLU) are developed along with, for the first time, precise expansion error formulas and convenient closed form error approximations with analytical rigor specifically enabled by the expansion method presented.
+
+An in-depth case study is presented demonstrating application to the equivalence testing problem of the Multi-layered Perceptron (MLP) wherein the new expansion is employed in a system identification based approach to extracting the weights of a network under test via analysis of response to a stimulus and confirming that the weights conform to a designed network.  Since artificial neural networks have been the subject of a tremendous amount of research in recent years and are the main motivating application, we begin by framing the gaps in the existing state of the art methods of polynomial expansion as applied to neural networks before moving on to frame the additional motivating applications which highlight the general utility of the technique.
+
+\section[Primary Motivation: Polynomials Applied to Neural Networks]{Primary Motivation: Polynomial Expansions\\as Applied to Artificial Neural Networks}
+
+\label{sec_motivation_neural_nets}
+
+Many classic and emerging neural networks employ nonlinear activation functions such as hyperbolic tangent and rectified linear units. Various polynomial expansions and approximations have been applied to nonlinear activations of neural networks to enable explainable, verifiable, and secure deployment of neural systems, with \cite{montavon_explaining_2017}, \cite{dutta_reachability_2019}, and \cite{obla_effective_2020} being three recent examples respectively.  The motivation to develop explainability and verification techniques is further enhanced by proposed use of neural networks in critical fielded systems such as unmanned aerial vehicles \cite{lai_adaptive_2016,nodland_neural_2013} and hypersonic vehicles \cite{xu_dob-based_2017}.  Meanwhile, use of neural networks in healthcare applications, such as \cite{shen_deep_2019}, further drives the need to develop secure inference techniques to protect third party private information \cite{kwabena_mscryptonet:_2019,obla_effective_2020}.  The polynomial expansion of neural network activation functions is a method employed in addressing all of these diverse and important challenges.
+
+\begin{table}
+	\caption[Qualitative Properties Considered]{
+		Qualitative Properties Considered for a
+	    Polynomial \\ Expansion of the Form:
+		$\varphi(v) = \sum_m^M \alpha_m v^m + H_M(v)$
+		\vspace{1mm}
+	}
+	\begin{tabularx}{0.98\columnwidth}{
+			>{\hsize=.6\hsize}X
+			>{\hsize=1.4\hsize}X
+		}
+		\hline
+		\textit{Property} & \textit{Description} \\
+		\hline
+		\hline
+		\textit{1. Exact \mbox{Coeffs.}} 
+		&
+		Precise analytic equations available
+		for the coefficients, $\alpha_m$, for the nonlinearities
+		considered.
+		\\
+		\hline
+		\textit{2. Explicit Exact Errors} 
+		&
+		Precise analytic equations are explicitly worked for
+		the expansion errors, $H_M(v)$.
+		\\
+		\hline
+		\textit{3. Monic Form}
+		&
+		The expansion is formulated directly as a sum of
+		monomials, i.e., $\sum_m \alpha_m v^m$ and not as
+		a sum of other polynomials or piecewise polynomials.
+		\\
+		\hline
+		\textit{4. Adjustable Domain}
+		&
+		The approximation $\varphi(v) \simeq \sum_m^M \alpha_m v^m$
+		is valid for any desired domain of validity $|v| < V$
+		without transforming or re-scaling $v$.
+		\\
+		\hline
+		\textit{5. Handles undef. derivs.}
+		&
+		The expansion is valid if some of the
+		derivatives of $\varphi$ are undefined.
+		\\
+		\hline
+		\textit{6. Consistent Method}
+		&
+		The method can be applied consistently to a wide
+		variety of functions without ad-hoc modifications.
+		\\
+		\hline
+	\end{tabularx}
+	\label{table_expansion_properties_considered}
+\end{table}
+
+\begin{table*}[t]
+	% increase table row spacing, adjust to taste
+	\renewcommand{\arraystretch}{1.35}
+	% if using array.sty, it might be a good idea to tweak the value of
+	% \extrarowheight as needed to properly center the text within the cells
+	\caption{Qualitative Comparison of Polynomial Expansion Techniques \\
+		Available for Neural Network Nonlinearities
+	    \vspace{1mm}}
+	\label{table_qualitative_comparison}
+	\centering
+	% Some packages, such as MDW tools, offer better commands for making tables
+	% than the plain LaTeX2e tabular which is used here.
+	\begin{tabularx}{0.98\textwidth}{
+			|c|
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| >{\centering\arraybackslash}X
+			| }
+		\hline
+		&
+		\multicolumn{6}{c|}{\textbf{Properties}} \\
+		\hline
+		\textbf{Technique}
+		& \textit{1.}
+		& \textit{2.}
+		& \textit{3.}
+		& \textit{4.}
+		& \textit{5.}
+		& \textit{6.} \\
+		\hline
+		\hline
+		AMITE                                                   & Y & Y & Y & Y & Y & Y \\
+		\hline
+		\hline
+		Asymptotics \cite{noauthor_hyperbolic_nodate}           & Y & \ & \ & \ & Y & \ \\
+		\hline
+		Bernstein \cite{huang_reachnn:_2019}                    & Y & \ & \ & Y & Y & Y \\
+		\hline
+		Chebyshev \cite{vlcek_chebyshev_2012}                   & Y & \ & \ & \ & Y & Y \\
+		\hline
+		Exponential Chebyshev \cite{koc_new_2013}               & Y & \ & \ & Y & Y & Y \\
+		\hline
+		Fast Fourier-Legendre \cite{alpert_fast_1991}           & \ & \ & \ & \ & Y & Y \\ 
+		\hline
+		Least Squares Regression \cite{obla_effective_2020}     & \ & \ & Y & Y & Y & Y \\
+		\hline
+		Minimax w. Chebyshev \cite{obla_effective_2020, lee_near-optimal_2020} 
+		& \ & \ & \ & Y & Y & Y \\
+		\hline
+		Piecewise \cite{baptista_low-resource_2013}             & \ & \ & \ & Y & Y & \ \\
+		\hline
+		Recursive Regression \cite{dutta_reachability_2019}     & \ & \ & \ & Y & Y & Y \\
+		\hline
+		Remez / Modified Remez \cite{lee_high-precision_2020, lee_high-precision_2020-1}
+		& \ & \ & \ & Y & Y & Y \\
+		\hline
+		Taylor\cite{bateman_higher_1953}                        & Y & Y & Y & \ & \ & Y \\
+		\hline
+		
+		\hline
+	\end{tabularx}
+\end{table*}
+
+Existing polynomial expansions of neural nonlinearity represent a broad sampling of the panopoly of analytical and numerical polynomial expansions developed over the last several hundred years (spanning from Taylor and Fourier to modern numerical techniques).  They can be categorized as follows.  First, the well-known Taylor series is employed often in the study of neural nonlinearities \cite{engelbrecht_using_2000,xiaoyun_new_neural_nets_2009,balduzzi_neural_2017,montavon_explaining_2017,guo_novel_2017,gaikwad_pruning_2018}.  While Taylor series provides the advantage of exact formulas for coefficients and errors and often provides a useful local approximation, its domain of validity is limited to $|v| < \frac{\pi}{2}$ for $\tanh(v)$ nonlinearities \cite{bateman_higher_1953} and it requires that a function have defined derivatives in the domain where the expansion must be valid.  A well known identity which is valid for large arguments is given: $\tanh(v) = 1 + 2\sum_{m=1}^{\infty}(-1)^m e^{-2 m v}\ \forall\ v > 0$ \cite{gradshtein_table_2007}, and can be manipulated into a power series like form by expanding $e^{-2 m v}$. However, the result is still not valid for small $v$.  Similarly, a number of asymptotic series are often available for nonlinear functions such as $\tanh$ but are often only valid in certain domains (e.g., large arguments)  \cite{noauthor_hyperbolic_nodate}, do not have a monic form, and are not generally differentiable \cite{gradshtein_table_2007}.
+
+A Chebyshev approximation can be applied using recursive formulas for the coefficients \cite{vlcek_chebyshev_2012}.  References employing Chebyshev approximations or comparing them to other approximations for neural nonlinearities include \cite{aboulatta_stabilizing_2019, lee_near-optimal_2020} and \cite{obla_effective_2020}.  Alternatively, the Fourier-Legendre series \cite{bojanic_rate_1981} has well-known methods for fast coefficient computation \cite{alpert_fast_1991} and provides a fast rate of convergence.  The Bernstein basis is employed by Huang et al. in ReachNN to perform reachability analysis for neural controlled systems \cite{huang_reachnn:_2019}.  Overall, the related polynomial basis techniques via Chebyshev, Fourier-Legendre, Bernstein and similar methods provide accurate approximation with the useful property that formulas for coefficients can be exact using some methods.  However, while most methods employing such techniques provide upper bounds on the error, exact error formulas have not yet been provided for the expansions of the neural nonlinearities considered.
+
+If analytic formulas are not required, many numerical techniques are available to approximate a nonlinearity.  Obla et al. compare least squares and best uniform approximation (i.e., minimax approximation) against Taylor series \cite{obla_effective_2020}. Lee et al. also use a minimax approximation with a Chebyshev basis \cite{lee_near-optimal_2020}, improving upon results from a modified Remez algorithm \cite{lee_high-precision_2020}. Numerically fit piecewise polynomials are suited for efficient implementation of a nonlinear function such as $\tanh$ over a wide domain \cite{namin_efficient_2009,armato_low-error_2011}.  Piecewise approximations can be combined with other methods, e.g., Chebyshev \cite{baptista_low-resource_2013}.
+
+Piecewise linear polynomials specifically are well suited to ReLU nonlinearities which are a special case thereof. They are key components of the Marabou framework for verification of deep neural networks \cite{katz_marabou_2019} and employed by Dutta et al. to perform reachability analysis via regressive polynomial rule inference \cite{dutta_reachability_2019}.  Dutta et al. further reduce the expansion error by repeatedly fitting a low order polynomial and fitting a new polynomial to the residual. This recursive approach keeps the resulting polynomial order low but does not lend itself to extraction of exact error formulas, which the authors cite as a challenge and then solve by further reducing the polynomial to a piecewise linear model \cite{dutta_reachability_2019}.
+
+\section{Generalization to Additional Motivating Applications}
+
+The need to design a new polynomial expansion having the properties of Table \ref{table_qualitative_comparison} is further motivated by a need to analyze the broad class of nonlinear systems modeled by $\tanh(v)$ and the related $\sech(v)$ in their strongly nonlinear regions.  While $\tanh(v)$ and $\sech(v)$ are commonly used as system models, they are often resistant to theoretical analysis as will be seen in the example applications.  As with neural networks, Taylor series is suitable for analyzing these functions about a point, however its rapid divergence for arguments $|v| > \frac{\pi}{2}$ when expanding about the origin is limiting.  Furthermore, other expansions, such as Chebyshev, Fourier-Legendre, and numerical techniques can be employed, however, these expansions still carry the limitations highlighted in Table \ref{table_qualitative_comparison}.
+
+The development of a new expansion and the generalization of that expansion in both its theoretical development and its application is therefore further motivated by the need to overcome these limitations in additional example applications of interest from the propagation of nonlinear waves and the analysis of nonlinear circuits.  While the example application to neural networks is intended to serve as an in-depth case study, these are intended to serve as illustrative examples of the general practical applicability of the technique.  The study of these functions is briefly motivated here.  Their detailed analysis is presented alongside the $\tanh$ and ReLU in Chapter \ref{chapter_improved_expansions} in the interest of emphasizing the striking mathematical parallels in the analysis of each function via the methods presented.
+
+\subsection{Traveling Ocean Wave Example}
+The hyperbolic secant and the hyperbolic tangent occur often in the analysis of many types of nonlinear waves. We do not intend to comprehensively survey their many occurrences here.  Instead, we provide a few samples of interest with the intent of illustrating the diversity of the fields wherein these functions arise. Both $\sech(v)$ and $\tanh(v)$ are of fundamental importance to the study of solitons \cite{scott_soliton:_1973}, appearing in the soliton solutions of systems that are still subjects of active research and arising especially often in the modeling of nonlinear wave phenomena.  Examples include: (a) the use of the Boussinesq equation to model sea water intrusion in coastal regions \cite{jazar_derivation_2014}, and simulate large traveling water waves \cite{constantin_penalization_2015}; (b) the use of the Korteweg–De Vries (KdV) equation in the modeling of shallow water waves and Eulerian hydrodynamics in general \cite{sprenger_shock_2017}; and (c) frequent use of the Schr\"{o}dinger equation in the analysis of nonlinear optics \cite{kivshar_optical_2003}.
+
+Motivated in part by the effects of ocean wave crests on naval radars and
+the dependence of these effects on relative height of the radar with respect
+to wave peaks at a given distance, we devise an illustrative example wherein
+the average height of an ocean wave traveling in shallow water is derived given
+incomplete information about the wave that was ascertained as it passed a point
+down range.  It is well known in the design and analysis of naval radar
+systems that wave crests can cause interference which can obscure true targets
+and/or cause false alarms (i.e., radar clutter) \cite{barton_modern_1988,friedman_naval_1981,skolnik_radar_2008}.  Although
+these effects have been known for decades, mitigating them is a
+challenge that industry is still developing new solutions to address
+\cite{fuchs_method_2018,lapat_high_2019,noauthor_quantile_2020}.
+We use the KdV equation to model waves traveling in shallow water, and then
+use the AMITE method to derive expressions for their height at a given
+point down-range from a reference point given
+information about their statistical properties.  We find the AMITE technique
+well suited to the integrals involved with solving this problem.
+
+\subsection{Nonlinear Amplifier Example}
+The hyperbolic tangent in particular appears often in the analysis of nonlinear electronics including Gallium Arsenide (GaAs) \cite{angelov_new_1992, mccamant_improved_1990, zhu_nonlinear_2005} and Gallium Nitride (GaN) \cite{bakhvalova_determination_2010, cabral_nonlinear_2004, otsuka_semi-physical_2011} metal semiconductor field effect transistors (MESFETs) and high electron mobility transistors (HEMTs), and in the modeling of op-amp nonlinearity \cite{abdelfattah_modeling_2006}.  The nonlinear properties of such components are even exploited in some designs to achieve desired effects in a diverse body of applications spanning music technology (e.g., in the classic Moog music synthesizer)
+\cite{moog_voltage-controlled_1965, moog_electronic_1969},
+Root-Mean-Square (RMS) to Direct Current (DC) conversion \cite{gilbert_rms_dc_2000} and chaotic circuits \cite{ketthong_simple_2017}. 
+
+Two seemingly disparate, yet mathematically similar, applications wherein
+analyzing the hyperbolic tangent has immediate practical application are
+(1) the transmission and reception of radio frequency
+(RF) signals and (2) the modeling of nonlinear analog audio devices.
+As an example of (1), in \cite{snopek_advantages_2007}, $\tanh$ shaped pulses
+are employed intentionally in an RF signal transmission system to encode information
+efficiently.
+Further, wideband nonlinear amplifiers can unintentionally introduce
+memory effects \cite{hyunchul_ku_behavioral_2003}
+and nonlinear harmonic distortion \cite{narisi_wang_linearity_2005} artifacts
+in transmitted and received signals which must be accounted for to reconstruct
+the original signals faithfully.
+As an example of (2), the $\tanh$ is employed to model nonlinear audio signal
+processing components in \cite{schuck_jr._audio_2016} and \cite{lazzarini_new_2010}.
+We note that in \cite{snopek_advantages_2007, lazzarini_new_2010, schuck_jr._audio_2016}, weaker series (e.g., Taylor, sum of exponentials) are
+employed to analyze the $\tanh$ and these applications stand to
+benefit from the new expansions developed herein.  In general, all of these diverse
+problems require analysis of soft-clipping and hard-clipping nonlinearities to rigorously
+determine their effect on input stimuli.  The
+polynomial expansions developed in this thesis are employed to this end
+in the case studies of Chapter \ref{chapter_additional_case_studies}.
+
+\section{Additional Related Work}
+This thesis contributes a fundamental mathematical toolbox applicable to a broad range of engineering problems in the study and analysis of nonlinear systems and specifically is motivated by recent work in the verification and explanation of neural network performance.  Additional related work spans sub-fields of artificial intelligence engineering including neural network test and verification, equivalent neural networks, neural network interpretability and explainability, and neural network replication attacks and defenses.  Both classical methods and state of the art work in these domains motivate the main contributions of this thesis and are surveyed here.  For each sub-field, important studies are surveyed in context and the motivations for extending them through the contributions developed are established.
+
+\subsection{Neural Network Test and Verification}
+The main case study of Chapter \ref{chapter_network_replication} focuses on employing the AMITE techniques in an MLP equivalency testing problem where a form of verification is executed to confirm that an implemented MLP neural network matches a designed MLP neural network under certain constraining assumptions which make such a comparison challenging (e.g., no access to hidden weights and no ability to perfectly measure response to stimuli).  The need for neural network verification has been recognized for decades \cite{peterson_foundation_1993} and the definition of verification for neural networks has evolved as the field of artificial intelligence engineering has evolved.  Early work emphasizes the need for system requirements and software testing \cite{schumann_verification_2003,gupta_tool_2004}. An early reference on neural network verification and validation is provided by Taylor \cite{taylor_methods_2006}.  This text introduces the classical definitions for verification (\emph{building the system right}) and validation (\emph{building the right system}).  The case study of Chapter \ref{chapter_network_replication}
+can be thought of as a classical type of verification problem wherein a test engineer must verify that a system was implemented correctly.  Recent studies on neural network verification focus on other aspects of the verification space including defense against and identification of adversarial perturbations \cite{darvish_rouani_safe_2019,venzke_verification_2020}, output
+reachable set estimation \cite{xiang_output_2018}, and computing
+upper bounds on error rates under adversarial attack
+\cite{dvijotham_efficient_2019}.  Liu et al. survey
+algorithms for verifying deep neural networks and
+categorize them into forms of reachability analysis, optimization
+to falsify an assertion, and search to falsify an assertion
+\cite{liu_Algorithms_2019}.  These studies further motivate the theoretical development and case studies contained herein due to their importance in the guaranteeing of output properties in neural control problems, e.g., in the safe neural control of autonomous vehicles.  As discussed at length in Section \ref{sec_motivation_neural_nets}, polynomial expansions and approximations are employed often in this domain and the main contributions of this thesis extend the state of the art for these methods.
+
+Further references include the following.  Bunel et al. present a unifying
+framework for the formal verification of piecewise linear
+neural networks \cite{bunel_unified_2018}. Other significant studies
+present output range analysis via
+over-approximation \cite{gehr_ai2:_2018}\cite{huang_divide_2020}
+and via exact (sound and complete) methods \cite{tran_nnv:_2020}
+\cite{tran_parallelizable_2019}, verification against a
+specification \cite{yaghoubi_worst-case_2020}, and a hybrid
+systems approach to verifying properties of neural
+network controllers with sigmoid activations \cite{ivanov_verisig:_2019}.
+A survey of the safety and trustworthiness of deep neural
+networks is provided by Huang et al. \cite{huang_survey_2020}.
+A review of the state of the art in testing AI systems for safety
+and robustness is provided by Wu et al. \cite{wu_testing_2020}.
+Furthermore still, fuzz testing has also been presented as a means to address neural network verification challenges, particularly for networks implemented in software.  White-box fuzz testing approaches with test coverage maximization strategies are available and demonstrated in recent work \cite{pei_deepxplore_2017,guo_dlfuzz_2018,odena_tensorfuzz_2019,liang_deepfuzzer_2019}.  A need to complement whitebox fuzz testing with methods of guaranteeing equivalence between two neural networks under more challenging assumptions (e.g., no access to individual weights, no ability to perfectly measure response to stimuli) adds additional motivation to the theoretical development and case studies addressing these challenges.
+
+\subsection{Neural Network Equivalency Testing}
+Since the main case study of Chapter \ref{chapter_network_replication}
+focuses on an MLP eqivalence testing problem, we also note some related work in this domain and note how the work of this thesis extends these studies.
+Methods of identifying equivalent neural networks given
+a matrix of neuron outputs are available
+\cite{laakso_content_2000,li_convergent_2015,raghu_svcca_2017,morcos_insights_2018}
+and have recently been advanced by Kornblith et al.
+\cite{kornblith_similarity_2019}.
+Methods to identify opportunities for compressing a neural
+network \cite{chang_deep_2015,huang_ltnn_2019} and for
+perturbing parameters to identify output-equivalent
+neural networks are also available \cite{dimattina_how_2010}.
+This thesis serves as a complement to these studies in providing
+a method of checking neural network equivalence (i.e., checking
+network under test compliance) by operating on the specified
+network weights and the replicated network weights without
+accessing the output signals of individual neurons.  In many practical applications it is not possible or practical to extract individual weights and individual latent output signals and it is not possible or practical to perfectly measure network outputs directly, especially if a neural network is part of a larger system, system of systems, or implemented in physical hardware.  We
+find that other network equivalency studies and bug finding tests do not
+consider output noise present when measuring test vector
+responses and do not consider the challenges of accessing latent signals in hardware implemented neural systems, adding to the motivation for the developments of Chapter \ref{chapter_improved_expansions} and the case study of Chapter \ref{chapter_network_replication}.
+
+\subsection{Neural Network Interpretability and Explainability}
+An additional motivation for analyzing polynomial representations of neural network activation functions in detail is in the explainability of neural network regression and classification mechanisms; i.e., in the explanation of the decisions made, values returned, or actions taken by a neural system.  It is well known that neural networks are universal function approximators, however their universal approximation capabilities are only valid on a bounded interval \cite{cybenko_approximation_1989} which makes determining exactly which function was learned within a space of possible functions that could have been learned is a challenge.  Due to intrinsic nonlinearity, indication that a neural network fit a function defined by data collected in a given region of the input space does not imply that the relationship learned will generalize outside the bounds of that region.  It remains an open question as to whether or not the relationships learned by neural networks form known functions and algorithms.  It has been recognized for decades that biological systems contain recurring fundamental circuit elements \cite{alon_introduction_2006} and facilitate robust, invariant representations of objects \cite{quiroga_invariant_2005}.  However, it has only recently been demonstrated that trained neural networks contain interpretable cells or sub-circuits comprising semantic functions and algorithms \cite{karpathy_visualizing_2015,zhou_object_2015,bau_network_2017,gonzalez-garcia_semantic_2017,olah2020zoom}.  Building on feature visualization methods such as those from Erhan et al. \cite{erhan2009visualizing}, Simonyan et al. \cite{simonyan_deep_2014}, and Mordvintsev et al. \cite{mordvinsev2015inceptionism}, a number of methods are now available to visualize individual sub-circuits inside neural networks \cite{nguyen_synthesizing_2016,nguyen_plug_2017,olah2017feature,hohman_summit:_2019,carter2019activation}.  The analysis methods of this work are developed with the intent of facilitating the detailed study of such small sub-circuits within larger neural networks and with the further intent of providing a link between the study of traditional nonlinear circuits and these neural sub-circuits.
+
+\subsection{Neural Network Replication Attack and Defense}
+Neural network replication as a form of model stealing attack wherein a surrogate model is trained to have similar classification performance as a target model is well explored \cite{tramer_stealing_2016,papernot_practical_2017,oh_reverse_2019,duddu_stealing_2018,orekondy_knockoff_2019}.  These studies further motivate the case studies presented in Chapter \ref{chapter_network_replication}, which build off the methods of neural network replication, re-purposing the \emph{avatar model} \cite{oh_reverse_2019} or \emph{knockoff net} \cite{orekondy_knockoff_2019} approach for the white-hat application of neural system or subsystem verification.  As will be elaborated in the main case study in Chapter \ref{chapter_network_replication}, a model replication approach is developed which (1) reproduces the network's output surface for inputs in the bounded range and (2) yields test signal responses that take an expected form.  The replication step is employed specifically to address problems related to guaranteeing that test inputs employed in neural systems verification applications sufficiently cover the input space to yield a comprehensive test.
+
+This development is further motivated by a need to enable additional experimentation with the use of various model replication strategies as a form of verification, building off the fundamental concept that introducing a replication step into the verification procedure provides an inherent guarantee of test signal coverage, since test signals with insufficient coverage will cause the replication step to fail.  Furthermore, defenses against replication attacks for neural systems deployed on neuromorphic hardware are presented by Yang et al. \cite{yang_thwarting_2019} and a software based defense against replication attacks for public prediction interfaces is presented by Juuti et al. \cite{juuti_prada_2019}.  These studies further motivate the main case study on neural network equivalency testing, since replication approaches for verification could be combined with these approaches and with principles from cyber-security to enable replication for the purposes of system verification for authorized users while blocking replication for unauthorized users.
+
+\section{Main Contributions}
+
+To address the limitations of many existing polynomial expansions, and to solve the problems in our example applications, a special functions approach is employed to develop a new polynomial expansion technique, applicable to a wide class of nonlinear functions and having all of our desired properties.  Motivated primarily by applications to neural network verification and security noted above in Section \ref{sec_motivation_neural_nets}, we provide, for the first time, the derivation of explicit exact error formulas and useful analytic approximations thereof.  To facilitate mathematical manipulation, we provide a monic polynomial form like that of the Taylor series and an adjustable domain of convergence that does not require transformation or re-scaling.  We provide exact coefficients that do not require iteration or recursion to compute and avoid the main disadvantage of the Taylor series by remaining robust to undefined derivatives.  Furthermore, the method provides a consistent approach which can be readily applied to a wide variety of nonlinear functions without \emph{ad hoc} manipulation for a specific nonlinearity type.
+
+The expansion is developed using integral transforms of the generalized Fourier type, modified according to derived criteria for convergence and as such is called the analytically modified integral transform expansion
+(AMITE) technique. The qualitative expansion properties that we consider are defined in Table \ref{table_expansion_properties_considered}.  A comprehensive comparison of AMITE with existing state-of-the-art
+expansion methods with respect to these properties is presented in Table \ref{table_qualitative_comparison}.  The main contributions are summarized as follows.
+
+
+\begin{enumerate}
+	\item A novel polynomial expansion technique, the analytically modified integral transform expansion (AMITE), is developed via a special functions approach to enable decomposition of nonlinear functions arising in neural networks, nonlinear waves, and nonlinear circuits into polynomial forms having several advantageous properties, listed in Table \ref{table_qualitative_comparison}, many of which are otherwise mutually exclusive.
+	
+	\item The expansion is carried out explicitly for the hyperbolic tangent, hyperbolic secant, hyperbolic secant squared, and ReLU nonlinearities and exact error formulas are derived and analyzed via exploitation of a number of non-trivial relationships amongst the special and elementary functions.  The exact error formulas are supplemented by convenient closed form approximations derived with analytical rigor uniquely facilitated by the novel expansion approach. 
+	
+	\item Using a single hidden layer MLP as an in-depth case study, use of the AMITE technique is demonstrated in a black-box system identification based equivalency test for checking that a given MLP is output-equivalent to another.  While similar methods would require piecewise polynomials or numerical fits due to the limitations of existing expansions available for neural nonlinearities, it is shown that the entire MLP can be efficiently expanded as a single multivariate polynomial approximation, opening new directions in neural network explainability and verification research. \label{list_item_mlp_case_study}
+	
+	\item Using traveling shallow water waves and nonlinear amplifier circuits as supplementary case studies, we demonstrate applicability of the AMITE technique to the general analysis of a broad class of nonlinear systems.  Problems in the analysis of unbiased and biased nonlinear amplifiers are solved.  The solutions involve a family of novel integer sequences which are derived and tabulated for the first time.  These sequences are not present in the Online Encyclopedia of Integer Sequences (OEIS) and have been submitted as part of the contribution this thesis makes to the broader academic community. \label{list_item_extra_case_study}
+	
+	\item Finally, several derivations detailing the exploitation of a number of non-trivial relationships and connections amongst the special functions are provided in the appendices to serve as a reference for future work in this domain.
+	
+\end{enumerate}
+
+These contributions, specifically the in-depth case study of (\ref{list_item_mlp_case_study}) and the extended case studies of (\ref{list_item_extra_case_study}) are uniquely enabled by the adjustable domain of convergence and simple monic form, exact coefficient formulas, and exact error formulas.  These improvements over prior expansions and the applications thereof to a wide variety of nonlinear systems including to address gaps in the state of the art for the analysis and test of neural networks establish that the AMITE technique is a useful complement to the existing panoply of polynomial expansions employed in the analysis of nonlinear systems.
+
+\textbf{Organization of this thesis:}
+Chapter \ref{chapter_definitions} defines the notation and assumptions.  In this chapter the main case study for MLP equivalency testing is formulated rigorously and the assumptions for this case study are formally defined.  The main expansion formulas and errors are then developed in Chapter \ref{chapter_improved_expansions}.  This chapter comprises the main mathematical contributions and develops the general expansion technique before applying it to expand four example functions of interest.  The key steps in extracting the exact error formulas and their closed form approximations are described.  The results of the expansion, i.e., evaluation of expansion accuracy and error formula accuracy are shown and the accuracy of both the exact error formulas and their closed form approximations is assessed.  The case study for application to single hidden layer MLP is presented in Chapter \ref{chapter_network_replication}.  In this chapter, a technique is developed to address the equivalency testing problem of MLP neural networks, allowing an implemented neural network to be checked for equivalency to a designed neural network without access to the latent weights and signals, and with only noisy imperfect access to the output.  A detailed analysis of the technique is provided for a fundamental MLP with two inputs, three hidden neurons, and one output. Scalability of the technique is then assessed for networks with more hidden neurons.  Additional case studies for nonlinear waves and circuits are presented in Chapter \ref{chapter_additional_case_studies} to show the general utility of the technique.  Solving the case studies results in a family of novel integer sequences which are derived and tabulated. Chapter \ref{chapter_future_work} outlines plans for several follow on studies enabled by this work including studies in neural systems verification, neural network interpretability and explainability, fundamental mathematical analysis of nested nonlinear functions, analysis of shallow water wave effects on naval radar systems, and characterization of nonlinear circuits. Chapter \ref{chapter_conclusion} concludes the thesis with a summary of the main contributions, results obtained, and implications.

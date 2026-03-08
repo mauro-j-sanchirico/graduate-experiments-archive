@@ -1,0 +1,149 @@
+\chapter{Definitions and Setup}
+
+\label{chapter_definitions}
+
+Here we review the definitions of the nonlinear functions considered, the forms of the expansions to be developed, the notation, assumptions, and problem setup for the main case study in MLP equivalence testing.  Notation for the expansion coefficients and the expansion errors is introduced.  Problem setup for auxiliary case studies follows in Chapter \ref{chapter_additional_case_studies}.
+
+\section{Nonlinear Functions and Expansion Forms}
+
+The nonlinearities considered explicitly are the rectified linear unit, hyperbolic secant, hyperbolic tangent, and the squares of the hyperbolic secant and hyperbolic tangent.  These functions are defined respectively
+\begin{align}
+	\relu(v) &= \frac{|v| + v}{2}, \\
+	\sech(v) &= \frac{2}{e^v + e^{-v}}, \\
+	\tanh(v) &= \frac{e^v - e^{-v}}{e^v + e^{-v}}, \\
+	\sech^2(v) &= 1 - \tanh^2(v). \label{eq_sech_tanh}
+\end{align}
+These functions are chosen to represent a variety of nonlinearities applicable in a wide variety of contexts.  The ReLU is representative of a hard-clip style nonlinearity.  It is a popular neural network activation function and also can be used to model general hard-clip phenomena such as a hard limiting amplifier.  The $\sech$ occurs often in the study of nonlinear waves and is related to the $\tanh$ through (\ref{eq_sech_tanh}).  The $\tanh$ enjoys a variety of applications in the modeling of nonlinear waves, soft-clipping nonlinear circuits, and is a common neural network activation function of historical significance in the field.  The squares of the $\sech$ and $\tanh$ also commonly arise in the analysis of nonlinear waves.
+
+\begin{figure}[!htb]
+	\includegraphics[width=\textwidth]{images/Nonlinearities.png}
+	\caption[Nonlinear Functions Considered]{Nonlinear functions considered.  Top left: the hyperbolic secant is a soft nonlinearity arising often in the study of nonlinear waves.  Top right: the hyperbolic tangent is a soft nonlinearity of historical significance in neural networks and arising often in the analysis of nonlinear electronics.  Bottom left: the rectified linear unit is a hard nonlinearity which is both a popular activation function in neural networks and a natural model for hard-clipping nonlinearities in circuits.  Bottom right: the hyperbolic secant squared also arises in the study of nonlinear waves, particularly in the analysis of waves traveling in shallow water.
+		\label{fig_sech} 
+	}
+\end{figure}
+
+When developing and denoting general expansions of functions $\varphi$
+we denote the coefficients $\alpha_m(M)$ such that a truncated approximation
+is written
+\begin{equation}
+	\label{eq_alpha_expansion}
+	\varphi(v) \simeq \sum_{m=0}^{M} \alpha_m(M) v^m.
+\end{equation}
+The coefficients are allowed to depend on the order of the expansion $M$.
+The exact expansion errors of order $M$ for function $\varphi$ are denoted $H_M^{\{\varphi\}}(v)$
+such that
+\begin{equation}
+	\label{eq_alpha_expansion_with_eta_error}
+	\varphi(v) = \sum_{m=0}^{M} \alpha_m(M) v^m + H_M^{\{\varphi\}}(v).
+\end{equation}
+Approximate expansion errors are denoted $I_M^{\{\varphi\}}(v)$ such that
+\begin{equation}
+	I_M^{\{\varphi\}}(v) \simeq H_M^{\{\varphi\}}(v) \quad \forall \quad |v| < V.
+\end{equation}
+Throughout, $V$ denotes an adjustable limit of validity.  We require that the expansion
+parameters can be tuned to allow any desired $V$.
+
+For each function, we develop expansions of the forms
+\begin{align}
+	\relu(v) &= \frac{v}{2} + \sum_{m=0}^{M} R_{2m}(M) v^{2m} + H_M^{\{\relu\}}(v), \\
+	\sech(v) &= \sum_{m=0}^{M} S_{2m}(M) v^{2m} + H_M^{\{\sech\}}(v), \\
+	\tanh(v) &= \sum_{m=0}^{M} T_{2m+1}(M) v^{2m+1} + H_M^{\{\tanh\}}(v), \\
+	\sech^2(v) &= \sum_{m=0}^{M} U_{2m}(M) v^{2m} + H_M^{\{\sech^2\}}(v), \label{eq_sech2_exp_exact_form}
+\end{align}
+which yield approximations of the forms
+\begin{align}
+	\relu(v) &\simeq \frac{v}{2} + \sum_{m=0}^{M} R_{2m}(M) v^{2m} ,
+	    &\forall \quad |v| < V , \label{eq_relu_exp_approx_form} \\
+	\sech(v) &\simeq \sum_{m=0}^{M} S_{2m}(M) v^{2m} ,
+	    &\forall \quad |v| < V , \label{eq_sech_exp_approx_form} \\
+	\tanh(v) &\simeq \sum_{m=0}^{M} T_{2m+1}(M) v^{2m+1} , 
+	    &\forall \quad |v| < V , \label{eq_tanh_exp_approx_form} \\
+	\sech^2(v) &\simeq \sum_{m=0}^{M} U_{2m}(M) v^{2m} , 
+	    &\forall \quad |v| < V . \label{eq_sech2_exp_approx_form}
+\end{align}
+
+\section{Application to MLP Equivalence Testing}
+
+For the Multi-layer Perceptron (MLP) case study, we consider networks
+having $N_I$ inputs and $N_H$ hidden neurons.
+Input layer weights and biases are denoted
+$W^{\{0\}} = \left[w_{n,i}^{\{0\}}\right] \in \mathcal{M}^{N_H \times N_I}$
+and $b^{\{0\}} = \left[b_{n}\right] \in \mathcal{M}^{N_H \times 1}$. Hidden
+layer weights and bias are denoted
+$w^{\{1\}} = \left[w_{n}^{\{1\}}\right] \in \mathcal{M}^{1 \times N_H}$
+and $b^{\{1\}} \in \mathcal{M}^{1 \times 1}$.  The network has the activation
+function $\varphi(v)$.  The weights and biases for a given network are
+collectively denoted
+$\beta = \left\{ W^{\{0\}}, w^{\{1\}}, b^{\{0\}}, b^{\{1\}} \right\}$.
+Such a network has the input-output relationship:
+\begin{equation}
+	\label{eq_mlp_input_output}
+	y\left(\alpha, \beta, x\right) = w^{\{1\}} \varphi\left(
+	W^{\{0\}} x + b^{\{0\}}\right) + b^{\{1\}}
+\end{equation}
+The input to hidden neuron $n$ is denoted
+\begin{equation}
+	\label{eq_hidden_neuron_input}
+	v_n = b_n^{\{0\}} + \sum_{i=1}^{N_I} w_{n,i}^{\{0\}}x_i \quad
+	\forall \quad n \in [1, N_H].
+\end{equation}
+The MLP architecture is shown in Fig. \ref{fig_mlp_architecture}.
+\begin{figure}[htb]
+	\includegraphics[width=\textwidth]{images/MLPArchitecture.png}
+	\caption[MLP Architecture and Notation]{\label{fig_mlp_architecture} MLP architecture and notation.}
+\end{figure}
+
+
+\subsection{Definitions}
+When describing the MLP equivalence testing problem, we employ the following definitions.
+We define an \emph{original network} to be a neural network, or a sub-circuit
+thereof, that is created by a designer, e.g., in software.
+Similarly, we define the \emph{network under test} to be the implemented
+neural network (e.g., in hardware), or a sub-circuit thereof, which a
+test procedure must determine to be output-equivalent to the original
+network.  The \emph{stimulus signal} is the signal applied and the
+\emph{response signal} is the output signal measured, including
+measurement noise.  The \emph{replicated network} is defined as the
+network having weights extracted from the network under test.
+A network under test is confirmed to be \emph{output-equivalent} to the
+original network if it is shown that they will produce sufficiently
+close outputs for all inputs in a given interval, according to a
+provided error metric.  We use the term \emph{conformance testing}
+to describe the act of testing to make sure a network under test is
+output-equivalent to an original network.  Two networks that are
+confirmed to be output-equivalent are said to be \emph{conformance tested}.
+The term conformance testing is used to avoid conflict with the software
+engineering notion of unit testing.
+
+\subsection{Assumptions}
+
+We make the following assumptions in developing the expansion
+and demonstrating its example application to MLP conformance testing.
+
+\begin{enumerate}
+	\item \textbf{Form of the nonlinear activations.}
+	We assume that nonlinearities, $\varphi$, to be analyzed within the network
+	can be represented by integral transforms in the form of
+	$\varphi(v) = \int_{\mathbb{R}}\Phi(\xi)f(\xi v)\mathrm{d}\xi$
+	wherein the kernels have Taylor series convergent on $(-\infty, \infty)$
+	of the form $f(\xi v) = \sum_m^\infty \tilde{f}(m) (\xi v)^m$.
+	
+	\item \textbf{Low-dimensional inputs.}
+	For the example conformance test, formulas are provided for
+	$n$-dimensional inputs; however, the test is only practical
+	for networks having a small number of inputs, such as those that
+	may be used in neural control applications.
+	
+	\item \textbf{Normalized inputs.}
+	For the example conformance test, we assume that at test time
+	knowledge of the largest possible magnitudes of all network
+	inputs is available.  Without loss of generality, we use inputs
+	$x_i$ normalized such that $x_i \in \left[-1, 1\right]$.
+	
+	\item \textbf{Assumed Structure.}
+	For the example conformance test, the \emph{expected structure}
+	(i.e., expected number of inputs and hidden nodes) of the network
+	under test is assumed to be known.  The \emph{actual structure}
+	of the network under test is assumed to be unknown.
+	
+\end{enumerate}

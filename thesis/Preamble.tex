@@ -1,0 +1,94 @@
+\documentclass[letterpaper]{book}
+
+\usepackage{array,multirow}
+\usepackage[toc,title,page]{appendix}
+
+% Bibliography uses biblatex and biber 
+\usepackage[defernumbers=true, backend=biber, style=ieee, dashed=false]{biblatex}
+%\usepackage{filecontents}
+
+% Math
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\DeclareMathOperator{\mean}{mean}
+\DeclareMathOperator{\asinh}{asinh}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\polylog}{Li}
+\DeclareMathOperator{\relu}{relu}
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{framed}
+
+% Alignment
+\usepackage{array}
+\usepackage{tabularx}
+\newcolumntype{L}{>{$}l<{$}}
+\usepackage{afterpage}
+%\setlength{\extrarowheight}{4pt}
+\def\arraystretch{1.5}
+\renewcommand{\tabularxcolumn}[1]{m{#1}} % verticle centering of table text
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries}
+
+% PDF, URL, and Hyperlink packages
+\usepackage{pdfpages}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-} % Hyperlink URLs
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian,english]{babel}
+\usepackage{csquotes}
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+
+\usepackage{tocloft}
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
+
+\usepackage{textcomp}
+\usepackage{graphicx,geometry}
+
+\usepackage{blindtext} % this is for filler text
+
+
+\usepackage{color} 
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\renewcommand{\thefootnote}{$\star$} 
+
+% Add your bibliography database here.
+\addbibresource{Sources.bib}
+\usepackage{notoccite}
+% Geometry
+
+\geometry{a4paper,
+  top=2in,
+  bottom=1.5in,
+  left=1.5in,
+  right=1in,
+  headheight=14.5pt, % the default is too short
+  heightrounded, % avoids the need of a flexible baselineskip
+} 
+\setlength{\headheight}{23pt}
+%\fancyhead[R]{\thepage} % Blank out the default header
+%\fancyfoot{} % Blank out the default footer
+%\fancyhead[l]{\textit{Name of the Thesis}} % Custom header text
+%\rhead{\leftmark}
+%\fancyhead[L,C]{}
+\fancyhead[L,R,C]{}
+\fancyhead[LO]{\slshape \rightmark} % Section
+\fancyhead[RE]{\slshape \leftmark} % Chapter
+
+\usepackage{lmodern}

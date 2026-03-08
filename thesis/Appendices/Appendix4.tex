@@ -1,0 +1,356 @@
+\section{Detailed Derivations of the Expansion Errors}
+\label{appendix_expansion_error_detail}
+
+Here we derive the expansion errors, $H_M^{\{\sech\}}$, $I_M^{\{\sech\}}$,
+$H_M^{\{\tanh\}}$, $I_M^{\{\tanh\}}$, $H_M^{\{\sech^2\}}$, $I_M^{\{\sech^2\}}$ in detail.
+We find that the integrals involved are resistant to direct solution by computer
+algebra systems and are not readily solved via existing integration rules.  Our approach focuses
+on breaking the integrals for the exact errors $H_M^{\{\varphi\}}$ apart into factors where
+some factors are responsible for divergence and other factors are responsible for the oscillation
+within the region of convergence, helping to reveal the closed form approximation for the
+Gibb's like errors within the region of convergence, which we denote $I_M^{\{\varphi\}}$.
+
+As an intermediate step in solving for the error in each expansion,
+we reformulate the problem in terms of the general Meijer-G function which facilitates further
+reduction via Mathematica \cite{Mathematica}.
+In reducing and manipulating the error integrals into their useful factorizations
+and in extracting their closed form approximations, we make use of identities from
+Prudnikov's \foreignlanguage{russian}{Интегралы и Ряды Том 3, Специальные функции 
+	Дополнительные Главы} (Integrals and Series Volume 3, More Special Functions) \cite{prudnikov_integrals_2003}.
+
+\subsection{Hyperbolic Secant}
+We begin with the exact error formula as derived in Chapter \ref{chapter_improved_expansions}, $H_M^{\{\sech\}}$, which follows directly from application of
+(\ref{eq_general_remainder}):
+\begin{align}
+	\begin{split}
+		&H_M^{\{\sech\}}(v) = \int_\sigma^{\infty} \!
+		\sech\left(\frac{\pi}{2}\xi\right)
+		\cos(\xi v) \mathrm{d}\xi
+	\end{split}
+	\\
+	\begin{split}
+		& \quad\quad + \frac{(-1)^{M+1}v^{2M+2}}{(2M+2)!} \int_0^{\sigma} \!
+		\xi^{2M+2} \sech\left(\frac{\pi}{2}\xi\right)
+		{}_{1}F_{2}\left(1; M+2, M+\frac{3}{2}; -\frac{v^2 \xi^2}{4}\right) \mathrm{d}\xi.
+	\end{split}
+\end{align}
+
+As noted in Chapter \ref{chapter_improved_expansions}, the second term dominates
+for large $v$ due to the $v^{2M+2}$ factor, causing the expected divergence
+for $|v| \geq V$.  Meanwhile, the first term dominates for small $v$ leading
+to Gibbs-like oscillation of the error for $|v| < V$.  Noting this effect,
+the integral of (\ref{eq_tanh_remainder2}) can be solved exactly to analyze the
+error, $I_M^{\{\sech\}}(v)$, inside the region of convergence for
+an $M$ term expansion.  We begin to attack this integral by breaking up the integrand via
+\begin{align}
+	\sech\left(\frac{\pi \xi}{2}\right)\cos(\xi v) = 
+	\frac{e^{\frac{\pi\xi}{2}} e^{-iv\xi}}{1 + e^{\pi \xi}}
+	+
+	\frac{e^{\frac{\pi\xi}{2}} e^{iv\xi}}{1 + e^{\pi \xi}}.
+\end{align}
+Integrating each term yields
+\begin{align}
+	\int_\sigma^\infty \! \frac{e^{\frac{\pi\xi}{2}} e^{\pm iv\xi}}{1 + e^{\pi \xi}} \mathrm{d}\xi
+	= \sech(v) - \frac{2 e^{\frac{1}{2}\sigma(\pi \pm 2iv)}}{\pi \pm 2iv}
+	{}_{2}F_{1}\left(1, \frac{1}{2} \pm \frac{iv}{\pi}; \frac{3}{2} \pm \frac{iv}{\pi}; -e^{\pi\sigma}\right).
+\end{align}
+This results in
+\begin{align}
+	I_M^{\{\sech\}}(v) &= 2 \sech(v) - \frac{1}{\pi}\left(u + u^*\right), \\
+	u &= \frac{(e^{\pi\sigma})^{\frac{1}{2} + \frac{iv}{\pi}}}{\frac{1}{2} + \frac{iv}{\pi}}
+	{}_{2}F_{1}\left(1, \frac{1}{2} + \frac{iv}{\pi}; \frac{3}{2} + \frac{iv}{\pi}; -e^{\pi \sigma}\right).
+\end{align}
+This can be equivalently expressed in terms of the Lerch Transcendent, $\Phi(z, a, b)$, by noting
+from \cite{prudnikov_integrals_2003} that
+\begin{align}
+	{}_{2}F_{1}\left(1, b; b+1; z\right) = b \Phi(z, 1, b)
+\end{align}
+implies
+\begin{gather}
+	\begin{split}
+		&I_M^{\{\sech\}}(v) = \int_\sigma^{\infty} \!
+		\sech\left(\frac{\pi}{2}\xi\right)
+		\cos(\xi v) \mathrm{d}\xi \\
+		\ \ &= 2 \sech(v)
+		- \frac{1}{\pi}\left(
+		\left( e^{\pi\sigma}\right)^{\frac{1}{2} + \frac{iv}{\pi}}
+		\Phi\left(-e^{\pi \sigma}, 1, \frac{1}{2} + \frac{iv}{\pi}\right)
+		+
+		\left( e^{\pi\sigma}\right)^{\frac{1}{2} - \frac{iv}{\pi}}
+		\Phi\left(-e^{\pi \sigma}, 1, \frac{1}{2} - \frac{iv}{\pi}\right)
+		\right).
+	\end{split}
+\end{gather}
+Noting that the identity
+\begin{align}
+	\Phi\left(1-z, 1, a\right)
+	= \frac{1}{\Gamma(a)}
+	G_{2,2}^{2,2}
+	\left(
+	\begin{matrix}
+		0, & 1-a \\
+		0, & 0
+	\end{matrix}\;\middle|\;z
+	\right)
+\end{align}
+from \cite{prudnikov_integrals_2003} implies
+\begin{align}
+	\Phi\left(-e^{\pi\sigma}, 1, \frac{1}{2} \pm \frac{iv}{\pi}\right)
+	= \frac{1}{\Gamma\left(\frac{1}{2} \pm \frac{iv}{\pi}\right)}
+	G_{2,2}^{2,2}
+	\left(
+	\begin{matrix}
+		0, & \frac{1}{2} \mp \frac{iv}{\pi}\\
+		0, & 0
+	\end{matrix}\;\middle|\; 1 + e^{\pi\sigma}
+	\right)
+\end{align}
+which further implies
+\begin{align}
+	\begin{split}
+		&I_M^{\{\sech\}}(v) = 2 \sech(v) \\
+		&\ - \frac{1}{\pi}\left(
+		\frac{\left(e^{\pi\sigma}\right)^{\frac{1}{2}+\frac{iv}{\pi}}}{\Gamma\left(\frac{1}{2} + \frac{iv}{\pi}\right)}
+		G_{2,2}^{2,2}
+		\left(
+		\begin{matrix}
+			0, & \frac{1}{2} - \frac{iv}{\pi}\\
+			0, & 0
+		\end{matrix}\;\middle|\; 1 + e^{\pi\sigma}
+		\right)
+		-
+		\frac{\left(e^{\pi\sigma}\right)^{\frac{1}{2}-\frac{iv}{\pi}}}{\Gamma\left(\frac{1}{2} - \frac{iv}{\pi}\right)}
+		G_{2,2}^{2,2}
+		\left(
+		\begin{matrix}
+			0, & \frac{1}{2} + \frac{iv}{\pi}\\
+			0, & 0
+		\end{matrix}\;\middle|\; 1 + e^{\pi\sigma}
+		\right)
+		\right).
+	\end{split}
+\end{align}
+
+This form facilitates manipulation via Mathematica, which recognizes many alternate
+representations of functions in Meijer-G form thus facilitating identifying a factorization
+which isolates the oscillating factors.  We achieve this by identifying the form
+\begin{align}
+	\begin{split}
+	I_M^{\{\sech\}}(v) &=
+	\frac{\left(e^{\pi\sigma}\right)^{\frac{1}{2}+\frac{iv}{\pi}}}
+	     {\left( e^{\pi\sigma} + 1 \right)\left( \frac{\pi}{2} - iv \right)}
+	{}_2F_{1}\left(1, 1; \frac{3}{2} - \frac{iv}{\pi}; \frac{1}{1 + e^{\pi\sigma}} \right)
+	\\
+	&\quad\quad + \frac{\left(e^{\pi\sigma}\right)^{\frac{1}{2}-\frac{iv}{\pi}}}
+	{\left( e^{\pi\sigma} + 1 \right)\left( \frac{\pi}{2} + iv \right)}
+	{}_2F_{1}\left(1, 1; \frac{3}{2} + \frac{iv}{\pi}; \frac{1}{1 + e^{\pi\sigma}} \right).
+	\end{split}
+\end{align}
+Noting that $\sigma$ increases with the number of terms $M$ and noting the limit
+\begin{align}
+	\lim_{\sigma \to \infty} {}_{2}F_{1}\left(1, 1; c; \frac{1}{1-e^{\pi \sigma}}\right) = 1
+\end{align}
+reveals the desired closed form expression
+\begin{align}
+	I_M^{\{\sech\}}(v) \simeq
+	\frac{\left(e^{\pi\sigma}\right)^{\frac{1}{2}+\frac{iv}{\pi}}}
+	{\left( e^{\pi\sigma} + 1 \right)\left( \frac{\pi}{2} - iv \right)}
+	+ \frac{\left(e^{\pi\sigma}\right)^{\frac{1}{2}-\frac{iv}{\pi}}}
+	{\left( e^{\pi\sigma} + 1 \right)\left( \frac{\pi}{2} + iv \right)}.
+\end{align}
+Simplifying trigonometrically yields
+\begin{align}
+	I_M^{\{\sech\}}(v) \simeq
+	\frac{
+		4 e^{\frac{\pi \sigma}{2}}
+		\left(\pi \cos(\sigma v) - 2 v \sin(\sigma v)\right)
+	}{(e^{\pi \sigma} + 1)(4v^2 + \pi^2)}.
+\end{align}
+
+\subsection{Hyperbolic Tangent}
+We begin with the exact error formula as derived in Chapter \ref{chapter_improved_expansions}, $H_M^{\{\tanh\}}$, which follows directly from application of
+(\ref{eq_general_remainder}):
+\begin{align}
+	\begin{split}
+		&H_M^{\{\tanh\}}(v) = \int_\tau^{\infty} \!
+		\csch\left(\frac{\pi}{2}\xi\right)
+		\sin(\xi v) \mathrm{d}\xi
+	\end{split}
+	\\
+	\begin{split}
+		& \quad\quad + \frac{(-1)^{M+1}v^{2M+3}}{(2M+3)!} \int_0^{\tau} \!
+		\xi^{2M+3} \csch\left(\frac{\pi}{2}\xi\right)
+		{}_{1}F_{2}\left(1; M+2, M+\frac{5}{2}; -\frac{v^2 \xi^2}{4}\right) \mathrm{d}\xi.
+	\end{split}
+\end{align}
+
+As noted in Chapter \ref{chapter_improved_expansions}, the second term dominates
+for large $v$ due to the $v^{2M+3}$ factor, causing the expected divergence
+for $|v| \geq V$.  Meanwhile, the first term (\ref{eq_tanh_remainder2})
+dominates for small $v$ leading to Gibbs-like oscillation of the
+error for $|v| < V$.  Noting this effect, the integral of
+(\ref{eq_tanh_remainder2}) can be solved exactly to analyze the
+error, $I_M^{\{\tanh\}}(v)$, inside the region of convergence for
+an $M$ term expansion, i.e.,
+\begin{gather}
+	\begin{split}
+		I_M^{\{\tanh\}}(v) &= \int_\tau^{\infty} \!
+		\csch\left(\frac{\pi}{2}\xi\right)
+		\sin(\xi v) \mathrm{d}\xi \\
+		&= 2 \tanh(v) - \frac{i}{\pi}\left(
+		\mathrm{B}_{e^{\pi \tau}}\left(\frac{1}{2} + \frac{iv}{\pi}, 0 \right)
+		- \mathrm{B}_{e^{\pi \tau}}\left(\frac{1}{2} - \frac{iv}{\pi}, 0 \right)\right). \\
+	\end{split}
+\end{gather}
+We will now reduce this result to a convenient approximate closed form which
+captures most of the Gibbs-like oscillation.  We begin by noting a series of
+equivalent representations of the integral.  The first of which employs the
+identity
+\begin{align}
+	{}_{2}F_{1}\left(a; b; b+1; z\right) = bz^{-b}\mathrm{B}_z(b, 1-a)
+\end{align}
+from \cite{prudnikov_integrals_2003}
+to make the substitution
+\begin{align}
+	\mathrm{B}_{e^{\pi\tau}}\left(\frac{1}{2} \pm \frac{iv}{\pi}, 0\right)
+	= \frac{(e^{\pi\tau})^{\frac{1}{2} \pm \frac{iv}{\pi}}}{\frac{1}{2} \pm \frac{iv}{\pi}}
+	{}_{2}F_{1}\left(1, \frac{1}{2} \pm \frac{iv}{\pi}; \frac{3}{2} \pm \frac{iv}{\pi}; e^{\pi \tau}\right).
+\end{align}
+This results in
+\begin{align}
+	I_M^{\{\tanh\}}(v) &= 2 \tanh(v) - \frac{i}{\pi}\left(u - u^*\right), \\
+	u &= \frac{(e^{\pi\tau})^{\frac{1}{2} + \frac{iv}{\pi}}}{\frac{1}{2} + \frac{iv}{\pi}}
+	    {}_{2}F_{1}\left(1, \frac{1}{2} + \frac{iv}{\pi}; \frac{3}{2} + \frac{iv}{\pi}; e^{\pi \tau}\right).
+\end{align}
+This can be equivalently expressed in terms of the Lerch Transcendent, $\Phi(z, a, b)$, by noting
+from \cite{prudnikov_integrals_2003} that
+\begin{align}
+	{}_{2}F_{1}\left(1, b; b+1; z\right) = b \Phi(z, 1, b)
+\end{align}
+implies
+\begin{align}
+	{}_{2}F_{1}\left(1, \frac{1}{2} \pm \frac{iv}{\pi}; \frac{3}{2} \pm \frac{iv}{\pi}; e^{\pi \tau}\right)
+	 = \left(\frac{1}{2} \pm \frac{iv}{\pi}\right)\Phi\left(e^{\pi\tau}, 1, \frac{1}{2} \pm \frac{iv}{\pi}\right)
+\end{align}
+which further implies
+\begin{align}
+\begin{split}
+	&I_M^{\{\tanh\}}(v) = 2 \tanh(v) \\
+	&\quad - \frac{i}{\pi}\left(
+	    \left(e^{\pi\tau}\right)^{\frac{1}{2}+\frac{iv}{\pi}} \Phi \left(e^{\pi\tau}, 1, \frac{1}{2} + \frac{iv}{\pi} \right)
+	    - \left(e^{\pi\tau}\right)^{\frac{1}{2}-\frac{iv}{\pi}} \Phi \left(e^{\pi\tau}, 1, \frac{1}{2} - \frac{iv}{\pi} \right)
+	\right).
+\end{split}
+\end{align}
+Noting that the identity
+\begin{align}
+	\Phi\left(1-z, 1, a\right)
+	= \frac{1}{\Gamma(a)}
+	G_{2,2}^{2,2}
+	\left(
+	\begin{matrix}
+		0, & 1-a \\
+		0, & 0
+	\end{matrix}\;\middle|\;z
+	\right)
+\end{align}
+from \cite{prudnikov_integrals_2003} implies
+\begin{align}
+	\Phi\left(e^{\pi\tau}, 1, \frac{1}{2} \pm \frac{iv}{\pi}\right)
+	= \frac{1}{\Gamma\left(\frac{1}{2} \pm \frac{iv}{\pi}\right)}
+	G_{2,2}^{2,2}
+	\left(
+	\begin{matrix}
+		0, & \frac{1}{2} \mp \frac{iv}{\pi}\\
+		0, & 0
+	\end{matrix}\;\middle|\; 1 - e^{\pi\tau}
+	\right)
+\end{align}
+which further implies
+\begin{align}
+	\begin{split}
+	&I_M^{\{\tanh\}}(v) = 2 \tanh(v) \\
+	&\ - \frac{i}{\pi}\left(
+	\frac{\left(e^{\pi\tau}\right)^{\frac{1}{2}+\frac{iv}{\pi}}}{\Gamma\left(\frac{1}{2} + \frac{iv}{\pi}\right)}
+	G_{2,2}^{2,2}
+	\left(
+	\begin{matrix}
+		0, & \frac{1}{2} - \frac{iv}{\pi}\\
+		0, & 0
+	\end{matrix}\;\middle|\; 1 - e^{\pi\tau}
+	\right)
+	-
+	\frac{\left(e^{\pi\tau}\right)^{\frac{1}{2}-\frac{iv}{\pi}}}{\Gamma\left(\frac{1}{2} - \frac{iv}{\pi}\right)}
+	G_{2,2}^{2,2}
+	\left(
+	\begin{matrix}
+		0, & \frac{1}{2} + \frac{iv}{\pi}\\
+		0, & 0
+	\end{matrix}\;\middle|\; 1 - e^{\pi\tau}
+	\right)
+	\right).
+    \end{split}
+\end{align}
+
+This form facilitates manipulation via Mathematica, which recognizes many alternate
+representations of functions in Meijer-G form thus facilitating identifying a factorization
+which isolates the oscillating factors.  We achieve this by identifying the form
+\begin{align}
+\begin{split}
+	I_M^{\{\tanh\}}(v) &= 2 \tanh(v) - \frac{i}{\pi}(u_1 - u_2), \\
+    u_1 &= \frac{2\pi \left(e^{\pi\tau}\right)^{\frac{1}{2}+\frac{iv}{\pi}} {}_{2}F_{1}\left(1, 1; \frac{3}{2} - \frac{iv}{\pi}; \frac{1}{1-e^{\pi\tau}}\right)}{\left(e^{\pi\tau} - 1\right)(\pi - 2iv)} + \pi\left(-e^{\pi\tau}\right)^{-\frac{1}{2} - \frac{iv}{\pi}}\sech(v), \\
+    u_2 &= \frac{2\pi \left(e^{\pi\tau}\right)^{\frac{1}{2}-\frac{iv}{\pi}} {}_{2}F_{1}\left(1, 1; \frac{3}{2} + \frac{iv}{\pi}; \frac{1}{1-e^{\pi\tau}}\right)}{\left(e^{\pi\tau} - 1\right)(\pi + 2iv)} + \pi\left(-e^{\pi\tau}\right)^{-\frac{1}{2} + \frac{iv}{\pi}}\sech(v).
+\end{split}
+\end{align}
+Simplifying the terms yields
+\begin{align}
+	u_1 &=
+	\frac{e^{\frac{\pi\tau}{2}}}{e^{\pi\tau} - 1}
+	\frac{e^{i\pi\tau}}{\left(\frac{1}{2} - \frac{iv}{\pi}\right)}
+	{}_{2}F_{1}\left(1, 1; \frac{3}{2} - \frac{iv}{\pi}; \frac{1}{1 - e^{\pi\tau}}\right)
+	- i\pi (\tanh(v)+1), \\
+	u_2 &=
+	\frac{e^{\frac{\pi\tau}{2}}}{e^{\pi\tau} - 1}
+	\frac{e^{-i\pi\tau}}{\left(\frac{1}{2} + \frac{iv}{\pi}\right)}
+	{}_{2}F_{1}\left(1, 1; \frac{3}{2} + \frac{iv}{\pi}; \frac{1}{1 - e^{\pi\tau}}\right)
+	- i\pi (1-\tanh(v)).
+\end{align}
+Further simplifying yields
+\begin{align}
+\begin{split}
+	&I_M^{\{\tanh\}}(v) = \\
+	&\quad \frac{i}{\pi}\frac{e^{\frac{\pi\tau}{2}}}{e^{\pi\tau} - 1}
+	\frac{e^{-i\pi\tau}}{\left(\frac{1}{2} + \frac{iv}{\pi}\right)}
+	{}_{2}F_{1}\left(1, 1; \frac{3}{2} + \frac{iv}{\pi}; \frac{1}{1 - e^{\pi\tau}}\right) \\
+    &\quad\quad -
+    \frac{i}{\pi}\frac{e^{\frac{\pi\tau}{2}}}{e^{\pi\tau} - 1}
+	\frac{e^{i\pi\tau}}{\left(\frac{1}{2} - \frac{iv}{\pi}\right)}
+	{}_{2}F_{1}\left(1, 1; \frac{3}{2} - \frac{iv}{\pi}; \frac{1}{1 - e^{\pi\tau}}\right)
+\end{split}
+\end{align}
+which can in turn be simplified to an exact expression for $I_M^{\{\tanh\}}(v)$, i.e.,
+\begin{align}
+	I_M^{\{\tanh\}}(v) &= 
+	\frac{e^{\frac{\pi\tau}{2}}}{e^{\pi\tau} - 1}\left(u - u*\right), \\
+	u &= \frac{e^{-i\tau v}}{v - i\frac{\pi}{2}}
+	     {}_{2}F_{1}\left(1, 1; \frac{3}{2} + \frac{iv}{\pi}; \frac{1}{1 - e^{\pi\tau}}\right).
+\end{align}
+Noting that $\tau$ increases with the number of terms $M$ and noting the limit
+\begin{align}
+	\lim_{\tau \to \infty} {}_{2}F_{1}\left(1, 1; c; \frac{1}{1-e^{\pi \tau}}\right) = 1
+\end{align}
+reveals the desired closed form expression
+\begin{align}
+	I_M^{\{\tanh\}}(v) &\simeq 
+	\frac{e^{\frac{\pi\tau}{2}}}{e^{\pi\tau} - 1}\left(
+	\frac{e^{-i\tau v}}{v - \frac{i\pi}{2}} + \frac{e^{i\tau v}}{v + \frac{i \pi}{2}}
+	\right).
+\end{align}
+Simplifying trigonometrically yields
+\begin{align}
+	I_M^{\{\tanh\}}(v) \simeq
+	\frac{
+		4 e^{\frac{\pi \tau}{2}}
+		\left(\pi \sin(\tau v) + 2 v \cos(\tau v)\right)
+	}{(e^{\pi \tau} - 1)(4v^2 + \pi^2)}.
+\end{align}

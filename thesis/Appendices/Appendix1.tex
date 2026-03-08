@@ -1,0 +1,96 @@
+\section{Hypergeometric Form of Taylor Expansion Errors For Sine and Cosine}
+\label{appendix_hyper_form}
+Here we present a derivation for the remainder formulas of the partial sums of sine and cosine.  These remainder formulas are employed in Chapter \ref{chapter_improved_expansions} to derive the coefficient and error formulas for the expansions.  When the sine or cosine kernel of a generalized Fourier transform is replaced by a substitute partial sum, these formulas are useful in determining which regions the resulting integral will be valid within.  The hypergeometric form of the remainder derived here is useful for making the factorization of the remainder into parts that grow with and without bound obvious.  The rapidly growing factor can then be used to analytically compute bounds wherein a generalized Fourier transform employing the corresponding partial sum as a kernel is valid.
+
+We begin with the Taylor series for the cosine and sine:
+\begin{align}
+	\cos(u) &= \sum_{m=0}^\infty \frac{(-1)^m x^{2m}}{(2m)!}, \\
+	\sin(u) &= \sum_{m=0}^\infty \frac{(-1)^m x^{2m+1}}{(2m+1)!}.
+\end{align}
+Separating into partial sums of order $M$ and remainders yields:
+\begin{align}
+	\cos(u) &= \sum_{m=0}^M \frac{(-1)^m x^{2m}}{(2m)!}
+	    + \sum_{m=M+1}^{\infty}\frac{(-1)^m x^{2m}}{(2m)!}, \\
+	\sin(u) &= \sum_{m=0}^\infty \frac{(-1)^m x^{2m+1}}{(2m+1)!}
+	    + \sum_{m=M+1}^{\infty}\frac{(-1)^m x^{2m+1}}{(2m+1)!}.
+\end{align}
+Changing the index of summation on the remainder terms and denoting them $\Upsilon_M^{\{\cos\}}(u)$ and $\Upsilon_M^{\{\sin\}}(u)$ respectively:
+\begin{align}
+	\Upsilon_M^{\{\cos\}}(u) &= 
+	(-1)^{M+1} u^{2M+2}
+	\sum_{m=0}^{\infty}
+	\frac{(-1)^m u^{2m}}{(2m+2M+2)!}, \\
+	\Upsilon_M^{\{\sin\}}(u) &= 
+	(-1)^{M+1} u^{2M+3}
+	\sum_{m=0}^{\infty}
+	\frac{(-1)^m u^{2 m}}{(2m+2M+3)!}.
+\end{align}
+Noting the identities
+\begin{align}
+	(a)_{m+n} &= (a)_m(a+m)_n, \\
+	(2n)! &= 4^n \left(\frac{1}{2}\right)_n n!, \\
+	(2n+1)! &= 4^n \left(\frac{3}{2}\right)_n n!,
+\end{align}
+which relate the factorial to the extended factorial, i.e.,
+\begin{align}
+	(a)_n &= a(a+1)(a+2) \cdots (a+n-1) \\
+	    &= \frac{\Gamma(a+n)}{\Gamma(a)},
+\end{align}
+we can simplify the remainders yielding
+\begin{align}
+	\Upsilon_M^{\{\cos\}}(u) &= 
+	(-1)^{M+1} u^{2M+2}
+	\sum_{m=0}^{\infty}
+	\frac{(-1)^m (-1)^{M+1} u^{2m} u^{2M+2}}{(2M+2)!\left(\frac{3}{2}+M\right)_m (2+M)_m 4^m}, \\
+	\Upsilon_M^{\{\sin\}}(u) &= 
+	(-1)^{M+1} u^{2M+3}
+	\sum_{m=0}^{\infty}
+	\frac{(-1)^m (-1)^{M+1} u^{2m} u^{2M+3}}{(2M+3)!\left(\frac{5}{2}+M\right)_m (2+M)_m 4^m}.
+\end{align}
+Factoring out terms that do not have the summation index $m$ yields
+\begin{align}
+	\Upsilon_M^{\{\cos\}}(u) &= 
+	\frac{(-1)^{M+1}u^{2M+2}}{(2M+2)!}
+	\sum_{m=0}^{\infty}
+	\frac{(-1)^m u^{2m}}{\left(\frac{3}{2}\right)_m(2+M)_m 4^m}, \\
+	\Upsilon_M^{\{\sin\}}(u) &= 
+	\frac{(-1)^{M+1}u^{2M+3}}{(2M+3)!}
+	\sum_{m=0}^{\infty}
+	\frac{(-1)^m u^{2m}}{\left(\frac{5}{2}\right)_m(2+M)_m 4^m}.
+\end{align}
+Further factoring out the terms that have $m$ in the exponent, multiplying by $\frac{m!}{m!}$, and noting that $m! = (1)_m$ makes the hypergeomtric form of the remainders readily apparent:
+\begin{align}
+	\Upsilon_M^{\{\cos\}}(u) &= 
+	\frac{(-1)^{M+1}u^{2M+2}}{(2M+2)!}
+	\sum_{m=0}^{\infty}
+	\frac{(1)_m}{\left(\frac{3}{2}\right)_m(2+M)_m m!} \left(-\frac{u^2}{4}\right)^m, \\
+	\Upsilon_M^{\{\sin\}}(u) &= 
+	\frac{(-1)^{M+1}u^{2M+3}}{(2M+3)!}
+	\sum_{m=0}^{\infty}
+	\frac{(1)_m}{\left(\frac{5}{2}\right)_m(2+M)_m m!}\left(-\frac{u^2}{4}\right)^m.
+\end{align}
+Noting the definition of the generalized hypergeometric function,
+\begin{align}
+	\ {}_{p}F_{q}
+	\left(a_1, \cdots, a_p; c_1, \cdots, c_q; x\right) = 
+	\sum_{n=0}^{\infty}
+	\frac{(a_1)_n (a_2)_n \cdots (a_p)_n}{(c_1)_n (c_2)_n \cdots (c_q)_n n!} x!, 
+\end{align}
+reveals the desired forms of the remainders
+\begin{align}
+	\begin{split}
+		\Upsilon_M^{\{\cos\}}(u) = 
+		\frac{(-1)^{M+1} u^{2M+2}}{(2M + 2)!}
+		\ {}_{1}F_{2}
+		\left(1; M+2, M+\frac{3}{2}; -\frac{u^2}{4}\right), 
+	\end{split}
+	\\
+	\begin{split}
+		\Upsilon_M^{\{\sin\}}(u) = 
+		\frac{(-1)^{M+1} u^{2M+3}}{(2M+3)!}
+		\ {}_{1}F_{2}
+		\left(1; M+2, M+\frac{5}{2}; -\frac{u^2}{4}\right).
+	\end{split}
+\end{align}
+
+

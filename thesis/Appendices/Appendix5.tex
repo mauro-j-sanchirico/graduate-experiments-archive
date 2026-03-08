@@ -1,0 +1,342 @@
+\section[Useful Special Function Relations]{Collection of Useful Relationships Between\\Special and Elementary Functions}
+
+This section contains a compilation of useful identifies and relationships between the special functions.  Some of these identities are well-known, some are intermediate results, some were generated via computer algebra systems to aid the results developed herein, and some have been derived and presented here for the first time.  The identities are compiled here and organized into subsections intended to facilitate their use in applications related to analysis of the kinds of nonlinear waves and circuits considered in this thesis.
+
+\subsection{Primary Definitions}
+
+The following definitions are well-known and included here for convenience.
+\subsubsection{Gamma Function and Extended Factorials}
+\begin{align}
+	\Gamma(n) = (n-1)! \\
+	(x)_n = \frac{\Gamma(x+n)}{\Gamma(x)}\\
+	(x)_n = \frac{(x+n-1)!}{(x-1)!} \\
+	\frac{1}{(k+1)_n} = \frac{k!}{(n+k)!}
+\end{align}
+
+\subsubsection{Inverse Tangent Integral and Legendre's Chi Function}
+\begin{align}
+	\mathrm{Ti}_s(z) = 
+	\frac{1}{2i}\left( \polylog_s(i z) - \polylog_s(-i z) \right) \\
+	\chi_s(z) =
+	\frac{1}{2}\left(\polylog_s(z) - \polylog_s(-z)\right) \\
+	\chi_s(z) = i\mathrm{Ti}_s(-iz) \\
+	\mathrm{Ti}_s(z) = -i\chi_s(iz)
+\end{align}
+
+\subsubsection{Generalized Hypergeometric and Meijer-G Functions}
+The generalized hypergeometric function is defined
+\begin{align}
+	\ {}_{p}F_{q}
+	\left(a_1, \cdots, a_p; c_1, \cdots, c_q; x\right) = 
+	\sum_{n=0}^{\infty}
+	\frac{(a_1)_n (a_2)_n \cdots (a_p)_n}{(c_1)_n (c_2)_n \cdots (c_q)_n n!} x!.
+\end{align}
+The Meijer-G function is defined
+\begin{align}
+	G_{p,q}^{m,n}
+	\left(
+	\begin{matrix}
+		a_1, & ..., & a_n \\
+		b_1, & ..., & b_n
+	\end{matrix}\;\middle|\;z
+	\right) =
+	\frac{1}{2 \pi i}
+	\int_L
+	\frac{\prod_{j=1}^m\Gamma(b_j-s)\prod_{j=1}^n\Gamma(1 - a_j + s)}
+	{\prod_{j=m+1}^q\Gamma(1-b_j+s)\prod_{j=n+1}^p\Gamma(a_j - s)}
+	z^s \mathrm{d}s.
+\end{align}
+The Meijer-G function can be used to represent many other special and elementary functions:
+\begin{align}
+G_{0,1}^{1,0}
+\left(\begin{matrix}-\\0\end{matrix}\;\middle|\;x\right) &= e^x,\\
+\sqrt{\pi}G_{0,2}^{1,0}\left(\begin{matrix}-\\0,\frac{1}{2}\end{matrix}\;\middle|\;\frac{x^2}{4}\right) &= \cos x.
+\end{align}
+
+\subsection{Basic Trigonometric and Hyperbolic Relationships}
+
+The following relationships are well known and/or easily proved and are included here for convenience.
+\begin{align}
+	\sech(u) &= \sec(iu) \\
+	\csch(u) &= i\csc(iu) \\
+	\sech\left(u + i\frac{\pi}{2}\right) &= -i\csch(u) \\
+	\sec\left(iu - \frac{\pi}{2}\right) &= -i \csch(u) \\
+	\sec\left(iu + \frac{\pi}{2}\right) &= i \csch(u)
+\end{align}
+
+\subsection{Taylor Series of Some Hyperbolic Functions}
+
+The following Taylor Series expansions are well-known and included here for convenience.
+\begin{align}
+	\sech(v) &= \sum_{m=0}^\infty \frac{E_{2m} v^{2m}}{(2m)!},
+	    &\forall \quad |v| < \frac{\pi}{2}, \\
+	\tanh(v) &= \sum_{m=1}^\infty \frac{(2^{2m}-1) 2^{2m} B_{2m} v^{2m-1}}{(2m)!},
+	    &\forall \quad |v| < \frac{\pi}{2}, \\
+	         &= \sum_{m=0}^\infty \frac{2^{2m+1}(4^{m+1}-1)B_{2m+2}}{(m+1)(2m+1)!},
+	         &\forall \quad |v| < \frac{\pi}{2}, \\
+	\sech^2(v) &= \sum_{m=0}^\infty \frac{2^{2m+1}(4^{m+1}-1)B_{2m+2}}{(m+1)(2m)!} v^{2m},
+	    &\forall \quad |v| < \frac{\pi}{2}.
+\end{align}
+\subsection{Some Trigonometric Integrals and Identities}
+\subsubsection{Rational Functions of the Cosine}
+For limits at infinity:
+\begin{align}
+	\int_{-\infty}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi = -\pi|x|.
+\end{align}
+For arbitrary limits, $\xi = a...b$:
+\begin{align}
+	\int_a^b \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi = x\mathrm{Si}(ax) - x\mathrm{Si}(bx) + \frac{\cos(ax)}{a} - \frac{\cos(bx)}{b}
+	\quad \forall \quad a < b, a > 0.
+\end{align}
+A slightly more general integral:
+\begin{align}
+	&\int \! \frac{\cos(x\xi)}{\xi^2 - a} \mathrm{d}\xi = \\
+	&\quad\quad \frac{\cos(\sqrt{a}x)}{2\sqrt{a}} \left(\mathrm{Ci}\left(x(\sqrt{a} - \xi)\right) - \mathrm{Ci}\left(-x(\sqrt{a} + \xi)\right) \right) \\
+    &\quad\quad\quad\quad +\frac{\sin(\sqrt{a}x)}{2\sqrt{a}} \left(\mathrm{Si}\left(x(\sqrt{a} - \xi)\right) - \mathrm{Si}\left(x(\sqrt{a} + \xi)\right) \right).
+\end{align}
+\subsubsection{Useful Limits}
+The Cosine Integral exhibits the following limits.
+\begin{align}
+	\lim_{x \to 0^-} \mathrm{Ci}(x) &= -\infty \\
+	\lim_{x \to 0^+} \mathrm{Ci}(x) &= -\infty \\
+	\lim_{x \to +\infty} \mathrm{Ci}(x) &= 0 \\
+	\lim_{x \to -\infty} \mathrm{Ci}(x) &= i\pi
+\end{align}
+The Sine Integral exhibits the following limits.
+\begin{align}
+	\lim_{x \to 0^-} \mathrm{Si}(x) &= 0 \\
+	\lim_{x \to 0^+} \mathrm{Si}(x) &= 0 \\
+	\lim_{x \to +\infty} \mathrm{Si}(x) &= \frac{\pi}{2} \\
+	\lim_{x \to -\infty} \mathrm{Si}(x) &= -\frac{\pi}{2} \\
+\end{align}
+\subsubsection{Useful Identities}
+\begin{align}
+	\mathrm{Ci}(-ax) - \mathrm{Ci}(ax) &= \log(-a x) - \log(a x) \\
+	\mathrm{Ci}(-ax) - \mathrm{Ci}(ax) &= i\pi \quad \forall \quad a,x > 0
+\end{align}
+
+
+\subsection{Partial Sums of Some Trigonometric Functions}
+
+The following partial summation expressions are useful in decomposing trigonometric functions, especially as substitute kernels in generalized-Fourier type integral transforms.  They can be proved using computer algebra systems which recognize the generalized hypergeometric functions.
+\begin{align}
+	\cos(u) &=
+	    \sum_{m=0}^{M} \frac{(-1)^m u^{2m}}{(2m)!}
+	    - \frac{(-1)^M u^{2M+2}}{(2(M+1))!}
+	    {}_{1}F_{2}\left(1; M+\frac{3}{2}, M+2; \frac{-u^2}{4}\right) \\
+	\sin(u) &=
+	    \sum_{m=0}^{M} \frac{(-1)^m u^{2m + 1}}{(2m + 1)!}
+	    - \frac{(-1)^M u^{2M+3}}{(2M+3)!}
+	{}_{1}F_{2}\left(1; M+\frac{5}{2}, M+2; \frac{-u^2}{4}\right) \\
+	\frac{\sin(\omega u)}{\omega} &= 
+	    \sum_{m=0}^M \frac{(-1)^m \omega^{2m} u^{2m+1}}{(2m + 1)!}
+	    - \frac{(-1)^M \omega^2 u^3 (\omega u)^{2M}}{2M + 3}
+	    \ {}_{1}F_{2}\left(1; M+\frac{5}{2}, M+2; -\frac{(\omega u)^2}{4}\right)
+\end{align}
+
+\subsection[Connections Between the Polylogarithms and the Hyperbolic Secant]{Connections Between the Polylogarithms\\and the Hyperbolic Secant and Cosecant}
+The following identities summarize convenient relationships between the polylogarithms and the hyperbolic secant and cosecant.  These relationships are useful in helping to prove integration identities related to these functions.
+\begin{align}
+	\polylog_0\left(-ie^{a\xi}\right) - \polylog_0\left(ie^{a\xi}\right)
+	\quad&= -\frac{ie^{a\xi}}{1 + i e^{a\xi}} - \frac{ie^{a\xi}}{1 - ie^{a\xi}} \\
+	\quad&= -\frac{2ie^{a\xi}}{(e^{a\xi} - i)(e^{a\xi} + i)} \\
+	\quad&= -i\sech\left(a\xi\right)
+\end{align}
+It is also useful to recognize the following symmetry.
+\begin{align}
+	\sech(a\xi) &= i\polylog_0\left(-ie^{-a\xi}\right) - i\polylog_0\left(ie^{-a\xi}\right) \\
+	&= i\polylog_0\left(-ie^{a\xi}\right) - i\polylog_0\left(ie^{a\xi}\right)
+\end{align}
+The following holds for the hyperbolic cosecant.
+\begin{align}
+	\csch(a\xi) &= i\sech\left(a\xi + \frac{i\pi}{2}\right) \\
+	&= \polylog_0\left(-e^{a\xi}\right) - \polylog_0\left(e^{a\xi}\right) \\
+	&= \frac{e^{ax}}{e^{ax} - 1} - \frac{e^{ax}}{e^{ax} + 1}
+\end{align}
+
+
+\subsection[Hyperbolic and Power Function Products]{Useful Forms for Integrating Some Products\\of Hyperbolic and Power Functions}
+General forms for the anti-derivatives of hyperbolic function and power function products are well-known and can be proved by application of iterated integration by parts.  Some forms of these identities and relationships between them are not well-known and a general proof of these forms is provided in Appendix \ref{appendix_expansions_detail}. 
+\subsubsection{In Terms of a Difference of Polylogarithms:}
+The integrals of the products of the hyperbolic cosecant and hyperbolic secant with power functions can be conveniently represented as sums of differences between complex polylogarithms.  This form is convenient when identities involving the polylogarithms, such as
+iterated differentiation or integration formulas, are required.
+\begin{align}
+	\int \! \xi^j \csch(a\xi) \mathrm{d}\xi &=
+	    \sum_{k=1}^{j+1} \frac{j!\xi^{j-k+1}}{a^{k}(j-k+1)!} \left(
+	        \polylog_k\left(-e^{-a\xi}\right)
+	      - \polylog_k\left(e^{-a\xi}\right)\right) \label{eq_csch_delta_polylog_form}\\
+	\int \! \xi^j \sech(a\xi) \mathrm{d}\xi &=
+	i \sum_{k=1}^{j+1} \frac{j!\xi^{j-k+1}}{a^{k}(j-k+1)!} \left(
+	\polylog_k\left(i e^{-a\xi}\right)
+	- \polylog_k\left(-i e^{-a\xi}\right)\right) \label{eq_sech_delta_polylog_form}
+\end{align}
+\subsubsection{In Terms of the Generalized Hypergeometric Functions:}
+The integrals can also be solved via identities from \cite{noauthor_hyperbolic_secant,noauthor_hyperbolic_cosecant}, which are closely related to the forms of eqs. (\ref{eq_csch_delta_polylog_form}) and (\ref{eq_sech_delta_polylog_form}).
+\begin{align}
+    \int \! \xi^j \csch(a\xi) \mathrm{d}\xi &=
+	-2\ j!\ e^{a\xi}\ \sum_{k=0}^j \frac{(-1)^k \xi^{j-k}}{(j-k)! a^{k+1}}
+	\ {}_{k+2}F_{k+1}\left(
+	\frac12, \ldots, \frac12, 1;
+	\frac32, \ldots, \frac32; e^{2 a \xi}
+	\right) \\
+	\int \! \xi^j \sech(a\xi) \mathrm{d}\xi &=
+	2\ j!\ e^{a\xi}\ \sum_{k=0}^j \frac{(-1)^k \xi^{j-k}}{(j-k)! a^{k+1}}
+	\ {}_{k+2}F_{k+1}\left(
+	\frac12, \ldots, \frac12, 1;
+	\frac32, \ldots, \frac32; -e^{2 a \xi}
+	\right)
+\end{align}
+\subsubsection{In Terms of the Inverse Tangent Integral and the Legendre Chi:}
+The following identities are closely related to each other and to the identities of section \ref{polylog_power_function_proof}.  They are proved in Appendix \ref{appendix_expansions_detail}.  The proof is similar in structure to that of section \ref{polylog_power_function_proof}.
+\begin{align}
+	\int \! \xi^j \sech(a\xi) \mathrm{d}\xi
+	&= -\frac{2}{a} \sum_{k=0}^j \frac{j! \xi^{j-k}
+		\mathrm{Ti}_{k+1}(e^{-a\xi})}{a^k (j-k)!} \\
+	&= \frac{2i}{a} \sum_{k=0}^j \frac{j! \xi^{j-k}
+		\chi_{k+1}(i e^{-a\xi})}{a^k (j-k)!} \\
+	\int \xi^j \csch(a \xi) \mathrm{d} \xi
+	&= -\frac{2}{a}\sum_{k=0}^{j}
+	\frac{j! \xi^{j-k} \chi_{k+1}(e^{-a\xi})}{a^k (j-k)!} \\
+	&= -\frac{2i}{a}\sum_{k=0}^{j}
+	\frac{j! \xi^{j-k} \mathrm{Ti}_{k+1}(-i e^{-a\xi})}{a^k (j-k)!}
+\end{align}
+
+\subsection{Repeated Integrals and Derivatives}
+
+\subsubsection{Repeated Integration and Differentiation of Polynomials}
+\begin{align}
+	\frac{\partial^n}{\partial z^n} z^m &= \frac{m!}{(m-n)!} z^{m-n} \\
+	\frac{\partial^n}{\partial z^n} z^n &= n! \\
+    \underbrace{\int \! \mathrm{d}z \, \cdots \int \! \mathrm{d}z}_{n} \, z^m &=
+    \frac{m!}{(m+n)!}z^{m+n} \\
+    &= \left(\prod_{k=1}^{n}\frac{1}{m+k}\right)z^{m+n} \\
+    &= \frac{1}{(m+1)_n}z^{m+n} \\
+    \underbrace{\int \! \mathrm{d}z \, \cdots \int \! \mathrm{d}z}_{n} \, z^n &=
+    \frac{n!}{(2n)!}z^{2n}
+\end{align}
+
+\subsubsection{Repeated Integration and Differentiation of Polylogarithms of Exponentials}
+\begin{align}
+\frac{\partial^n}{\partial z^n} \mathrm{Li}_m (ie^{az}) &=
+a^n \mathrm{Li}_{m-n}(ie^{az}) \\
+\frac{\partial^n}{\partial z^n} \mathrm{Li}_m (-ie^{az}) &=
+a^n \mathrm{Li}_{m-n}(-ie^{az}) \\
+\underbrace{\int \! \mathrm{d}z \, \cdots \int \! \mathrm{d}z}_{n} \, \mathrm{Li}_m(ie^{az}) &=
+\frac{1}{a^n}\mathrm{Li}_{m+n}(ie^{az}) \\
+\underbrace{\int \! \mathrm{d}z \, \cdots \int \! \mathrm{d}z}_{n} \, \mathrm{Li}_m(-ie^{az}) &=
+\frac{1}{a^n}\mathrm{Li}_{m+n}(-ie^{az})
+\end{align}
+
+\subsubsection{Repeated Integration and Differentiation of the Hyperbolic Secant}
+\begin{align}
+	\frac{\partial^n}{\partial z^n} \mathrm{sech}(az)
+	&= ia^n\left(\mathrm{Li}_{-n}(-ie^{az}) - \mathrm{Li}_{-n}(ie^{az})\right) \\
+	&= i(-1)^n a^n\left(\mathrm{Li}_{-n}(-ie^{-az}) - \mathrm{Li}_{-n}(ie^{-az})\right) \\
+	\underbrace{\int \! \mathrm{d}z \, \cdots \int \! \mathrm{d}z}_{n} \, \sech(a\xi)
+	&= \frac{i}{a^n}\left(\polylog_n\left(-ie^{a\xi}\right)-\polylog_n\left(ie^{a\xi}\right)\right) \\
+	&= \frac{i(-1)^n}{a^n}\left(\polylog_n\left(-ie^{-a\xi}\right)-\polylog_n\left(ie^{-a\xi}\right)\right)
+\end{align}
+
+\subsection{Integrals of Polylogarithm and Power Function Products}
+\label{polylog_power_function_proof}
+The integration of products of polylogarithms and power functions is closely related to the integration of products of the hyperbolic secant and power functions.  Identities are shown here and proved.  The proof is similar in structure to the proof for the identities of Appendix \ref{appendix_expansions_detail}.
+\subsubsection{Identities}
+\begin{align}
+	\int \! \xi^{n}\mathrm{Li}_{-m}(ie^{a\xi}) \, \mathrm{d}\xi
+	=  \frac{(-1)^n n!}{a^{n+1}} \mathrm{Li}_{n - m + 1}(ie^{a\xi}) \,
+	+ \sum_{k=0}^{n-1} \!
+	\frac{(-1)^k n! \xi^{n-k}}{(n-k)! a^{k+1}} \mathrm{Li}_{k+1-m}(ie^{a\xi})
+\end{align}
+\begin{align}
+	\int \! \xi^{n}\mathrm{Li}_{-m}(-ie^{a\xi}) \, \mathrm{d}\xi
+	=  \frac{(-1)^n n!}{a^{n+1}} \mathrm{Li}_{n - m + 1}(-ie^{a\xi}) \,
+	+ \sum_{k=0}^{n-1} \!
+	\frac{(-1)^k n! \xi^{n-k}}{(n-k)! a^{k+1}} \mathrm{Li}_{k+1-m}(-ie^{a\xi})
+\end{align}
+\begin{align}
+	&\int \! \xi^{2j}\left(\mathrm{Li}_{-j}(-ie^{a\xi}) - \mathrm{Li}_{-j}(ie^{a\xi}) \right) \, \mathrm{d}\xi \\
+	&\quad\quad = \frac{(2j)!}{a^{2j+1}} \left(
+	\mathrm{Li}_{j + 1}(-ie^{a\xi})  - \mathrm{Li}_{j + 1}(ie^{a\xi}) 
+	\right) \\
+	&\quad\quad\quad\quad+ \sum_{k=0}^{2j-1} \!
+	\frac{(-1)^k (2j)! \xi^{2j-k}}{(2j-k)! a^{k+1}} \left(
+	\mathrm{Li}_{k+1-j}(-ie^{a\xi}) - \mathrm{Li}_{k+1-j}(ie^{a\xi})
+	\right)
+\end{align}
+\begin{align}
+	&\forall \quad n, m \in \mathbb{N}, \quad n, m > 0
+\end{align}
+
+\subsubsection{Proof}
+Here we develop an integration identity for
+\begin{align}
+\int \! \xi^{n}\mathrm{Li}_{-m}(ie^{a\xi}) \, \mathrm{d}\xi.
+\end{align}
+We begin with the repeated integration by parts formula:
+\begin{align}
+\int \! \xi^{n}\mathrm{Li}_{-m}(ie^{a\xi}) \, \mathrm{d}\xi
+&= \int \! f(\xi) \frac{\partial^n g(\xi)}{\partial \xi^n} \, \mathrm{d}\xi \\
+&= (-1)^n \int \! \frac{\partial^n f(\xi)}{\partial \xi^n} g(\xi) \, \mathrm{d}\xi
++ \sum_{k=0}^{n-1} \!
+(-1)^k \frac{\partial^k f(\xi)}{\partial \xi^k}
+\frac{\partial^{n-k-1} g(\xi)}{\partial \xi^{n-k-1}}.
+\end{align}
+To populate the parts of this formula we compute the repeated integrals of $g$
+\begin{align}
+g(\xi)
+&= \underbrace{\int \! \mathrm{d}\xi \, \cdots \int \! \mathrm{d}\xi}_{n} \,
+    \frac{\partial^n g(\xi)}{\partial \xi^n} \\
+&= \underbrace{\int \! \mathrm{d}\xi \, \cdots \int \! \mathrm{d}\xi}_{n} \, \mathrm{Li}_{-m}(ie^{a\xi}) \\
+&= \frac{1}{a^{n}}\mathrm{Li}_{n - m}(ie^{a\xi}),
+\end{align}
+the repeated derivatives of $f$
+\begin{align}
+\frac{\partial^n f(\xi)}{\partial \xi^n} &=
+    \frac{\partial^n}{\partial \xi^n} \xi^n = n!, \\
+\frac{\partial^k f(\xi)}{\partial \xi^k} &=
+    \frac{\partial^k}{\partial \xi^k} \xi^n =
+    \frac{n!}{(n-k)!} \xi^{n-k},
+\end{align}
+and the repeated derivatives of $g$
+\begin{align}
+\frac{\partial^{n-k-1} g(\xi)}{\partial \xi^{n-k-1}}
+    &= \frac{\partial^{n-k-1}}{\partial \xi^{n-k-1}}
+    \underbrace{\int \! \mathrm{d}\xi \, \cdots \int \! \mathrm{d}\xi}_{n} \, \mathrm{Li}_{-m}(ie^{a\xi}) \\
+    &= \underbrace{\int \! \mathrm{d}\xi \, \cdots \int \! \mathrm{d}\xi}_{k+1} \, \mathrm{Li}_{-m}(ie^{a\xi}) \\
+    &= \frac{1}{a^{k+1}} \mathrm{Li}_{k+1-m}(ie^{a\xi}).
+\end{align}
+Substituting the pieces back into the integration by parts formula yields
+\begin{align}
+\int \! \xi^{n}\mathrm{Li}_{-m}(ie^{a\xi}) \, \mathrm{d\xi}
+=  \frac{(-1)^n n!}{a^{n}} \int \!
+\mathrm{Li}_{n - m}(ie^{a\xi}) \,
+\mathrm{d\xi}
++ \sum_{k=0}^{n-1} \!
+\frac{(-1)^k n! \xi^{n-k}}{(n-k)! a^{k+1}} \mathrm{Li}_{k+1-m}(ie^{a\xi}).
+\end{align}
+Integrating $\int \! \polylog_{n-m}\left(ie^{a\xi}\right) \mathrm{d}\xi$ yields the integration identity:
+\begin{align}
+	\int \! \xi^{n}\mathrm{Li}_{-m}(ie^{a\xi}) \, \mathrm{d}\xi
+	=  \frac{(-1)^n n!}{a^{n+1}} \mathrm{Li}_{n - m + 1}(ie^{a\xi}) \,
+	+ \sum_{k=0}^{n-1} \!
+	\frac{(-1)^k n! \xi^{n-k}}{(n-k)! a^{k+1}} \mathrm{Li}_{k+1-m}(ie^{a\xi}).
+\end{align}
+Due to trivial symmetry another identity is revealed:
+\begin{align}
+	\int \! \xi^{n}\mathrm{Li}_{-m}(-ie^{a\xi}) \, \mathrm{d}\xi
+	=  \frac{(-1)^n n!}{a^{n+1}} \mathrm{Li}_{n - m + 1}(-ie^{a\xi}) \,
+	+ \sum_{k=0}^{n-1} \!
+	\frac{(-1)^k n! \xi^{n-k}}{(n-k)! a^{k+1}} \mathrm{Li}_{k+1-m}(-ie^{a\xi}).
+\end{align}
+Some trivial substitution yields another identity for polylogarithms occurring in pairs:
+\begin{align}
+&\int \! \xi^{2j}\left(\mathrm{Li}_{-j}(-ie^{a\xi}) - \mathrm{Li}_{-j}(ie^{a\xi}) \right) \, \mathrm{d}\xi \\
+&\quad\quad = \frac{(2j)!}{a^{2j+1}} \left(
+    \mathrm{Li}_{j + 1}(-ie^{a\xi})  - \mathrm{Li}_{j + 1}(ie^{a\xi}) 
+\right) \\
+&\quad\quad\quad\quad+ \sum_{k=0}^{2j-1} \!
+    \frac{(-1)^k (2j)! \xi^{2j-k}}{(2j-k)! a^{k+1}} \left(
+        \mathrm{Li}_{k+1-j}(-ie^{a\xi}) - \mathrm{Li}_{k+1-j}(ie^{a\xi})
+    \right).
+\end{align}
+

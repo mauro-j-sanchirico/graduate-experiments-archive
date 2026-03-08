@@ -1,0 +1,135 @@
+\section{Useful Integral Representation of the Absolute Value Function}
+Integrals of the form $\int \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi$ arise in the
+Fourier transform of $\frac{1}{\xi^2}$ and as such are related to the
+absolute value function by:
+\begin{align}
+	\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \frac{\sqrt{2/\pi}}{\xi^2}e^{i x \xi} \mathrm{d}\xi
+	    &= -|x|, \\
+	\sqrt{\frac{2}{\pi}} \int_{0}^{\infty} \frac{\sqrt{2/\pi}}{\xi^2}\cos(x \xi) \mathrm{d}\xi
+	    &= -|x|.
+\end{align}
+Here we prove the two related identities:
+\begin{align}
+	|x| &= -\frac{1}{\pi} \int_{-\infty}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi, \label{eq_cos_rat_minf_inf} \\
+	|x| &= -\frac{2}{\pi} \int_{0}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi. \label{eq_cos_rat_0_inf}
+\end{align}
+Noting that the integrand in each case has a discontinuity at $\xi=0$, we can obtain finite values of
+the integrals through application of the Cauchy Principal Value (CPV) theorem, i.e.,
+\begin{align}
+	\mathrm{P.V.} \, \int_a^b \!  f(x) \mathrm{d}x
+	    &= \lim_{\epsilon \to 0^+} \left(
+	        \int_a^{c-\epsilon} \! f(x) \mathrm{d}x + \int_{c+\epsilon}^{b} f(x) \mathrm{d}x
+	    \right).
+\end{align}
+
+\subsection{For the Case of Both Limits at Infinity}
+We can directly attack (\ref{eq_cos_rat_minf_inf}) in a way that is intuitive but non-rigorous by first noting the anti-derivative
+\begin{align}
+	\int \! \frac{\cos(\xi x)}{\xi^2} \mathrm{d}\xi =
+	\frac{-x \xi\mathrm{Si}(x\xi) + \cos(x\xi)}{\xi}.
+\end{align}
+The anti-derivative has well defined limits at $+\infty$ and $-\infty$:
+\begin{align}
+	\lim_{\xi \to \infty} \frac{-x \xi\mathrm{Si}(x\xi) + \cos(x\xi)}{\xi} &= \frac{-\pi|x|}{2}, \\
+	\lim_{\xi \to -\infty} \frac{-x \xi\mathrm{Si}(x\xi) + \cos(x\xi)}{\xi} &= \frac{\pi|x|}{2}.
+\end{align}
+The anti-derivative approachs $\infty$ from the right at $0$ and approaches $-\infty$ from the left
+at $0$:
+\begin{align}
+	\lim_{\xi \to 0^+} \frac{-x \xi\mathrm{Si}(x\xi) + \cos(x\xi)}{\xi} &= \infty, \\
+	\lim_{\xi \to 0^-} \frac{-x \xi\mathrm{Si}(x\xi) + \cos(x\xi)}{\xi} &= -\infty.
+\end{align}
+Using the above, the integral can be evaluated from
+$\xi=\epsilon...\infty$ and from $\xi=-\infty...-\epsilon$:
+\begin{align}
+	\int_{\epsilon}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi
+	&= \frac{-\pi|x|}{2} + x \mathrm{Si}(\epsilon x) + \frac{\cos(\epsilon x)}{\epsilon},
+	\\
+	\int_{-\infty}^{-\epsilon} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi
+	&= \frac{-\pi|x|}{2} + x \mathrm{Si}(\epsilon x) + \frac{\cos(\epsilon x)}{\epsilon}.
+\end{align}
+Breaking the original integral into parts and solving yields:
+\begin{align}
+	\int_{-\infty}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi
+	&= \lim_{\epsilon \to 0^-} \int_{\epsilon}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi
+	+ \lim_{\epsilon \to 0^+} \int_{\epsilon}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi \\
+	&= \lim_{\epsilon \to 0^-} \left\{ \frac{-\pi|x|}{2} + x \mathrm{Si}(\epsilon x) + \frac{\cos(\epsilon x)}{\epsilon}\right\} \\
+	&\quad\quad\quad\quad+ \lim_{\epsilon \to 0^+} \left\{ \frac{-\pi|x|}{2} + x \mathrm{Si}(\epsilon x) + \frac{\cos(\epsilon x)}{\epsilon}\right\}.
+\end{align}
+Taking the limits of the terms
+\begin{align}
+	\lim_{\epsilon \to 0 } x \mathrm{Si}(\epsilon x) &= 0, \\
+	\lim_{\epsilon \to 0^-} \frac{\cos(\epsilon x)}{\epsilon} &= -\infty, \\
+	\lim_{\epsilon \to 0^+} \frac{\cos(\epsilon x)}{\epsilon} &= \infty,
+\end{align}
+and substituting the limits and letting opposing infinities cancel due to symmetry:
+\begin{align}
+	\int_{-\infty}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi = -\pi|x|.
+\end{align}
+For arbitrary limits, $\xi = a...b$:
+\begin{align}
+	\int_a^b \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi = x\mathrm{Si}(ax) - x\mathrm{Si}(bx) + \frac{\cos(ax)}{a} - \frac{\cos(bx)}{b}
+	\quad \forall \quad a < b, a > 0.
+\end{align}
+\subsection{For the Case of Limits at Zero and Infinity}
+By starting with a more general integral,
+\begin{align}
+	F(x) = \int_0^{\infty} \! \frac{\cos(x \xi)}{\xi^2 -a} \mathrm{d} \xi,
+\end{align}
+which has the anti-derivative
+\begin{align}
+	F(x) &= \frac{\cos(\sqrt{a}x)}{2\sqrt{a}} \left(\mathrm{Ci}\left(x(\sqrt{a} - \xi)\right) - \mathrm{Ci}\left(-x(\sqrt{a} + \xi)\right) \right) \\
+	&\quad\quad +\frac{\sin(\sqrt{a}x)}{2\sqrt{a}} \left(\mathrm{Si}\left(x(\sqrt{a} - \xi)\right) - \mathrm{Si}\left(x(\sqrt{a} + \xi)\right) \right),
+\end{align}
+we can rigorously prove (\ref{eq_cos_rat_0_inf}).
+The CPV is given:
+\begin{align}
+	&\mathrm{P.V.} \, \left\{-\frac{2}{\pi} \int_0^{\infty} \! \frac{\cos(x \xi)}{\xi^2 -a} \mathrm{d} \xi \right\} = \\
+    &\quad\quad\quad\quad \lim_{c \to \sqrt{a}^-} \left\{ -\frac{2}{\pi} \int_0^{c} \! \frac{\cos(x \xi)}{\xi^2 -a} \mathrm{d} \xi \right\}
+    + \lim_{c \to \sqrt{a}^+} \left\{ -\frac{2}{\pi} \int_c^{\infty} \! \frac{\cos(x \xi)}{\xi^2 -a} \mathrm{d} \xi \right\}.
+\end{align}
+We proceed by computing the limits of the integral at each key value of $\xi$.
+\begin{align}
+	\lim_{\xi \to 0^+} F(\xi) &= \frac{\cos\left(\sqrt{a}x\right)}{2\sqrt{a}} \left( 
+		\mathrm{Ci}(-\sqrt{a}x) - \mathrm{Ci}(\sqrt{a}x)\right), \\
+	\lim_{\xi \to \sqrt{a}} F(\xi) &= \frac{\cos\left(\sqrt{a}x\right)}{2\sqrt{a}} \left(
+	    \lim_{\xi \to \sqrt{a}} \mathrm{Ci}\left(-(\sqrt{a}-\xi)x\right) - \mathrm{Ci}\left(2\sqrt{a}x\right) \right) - \frac{\sin\left(\sqrt{a}x\right)}{2\sqrt{a}} \mathrm{Si}\left(2\sqrt{a} x\right) \label{eq_lim_sqrt_a_cos_xi_integral},\\
+	\lim_{\xi \to +\infty} F(\xi) &= -\frac{\pi \sin\left(\sqrt{a} x \right)}{2 \sqrt{a}}.
+\end{align}
+
+Note that because the limit of (\ref{eq_lim_sqrt_a_cos_xi_integral}) is the same from the left and
+from the right sides we can solve
+\begin{align}
+	\int_0^{\infty} \! \frac{\cos(\xi x)}{\xi^2 - a} \mathrm{d}\xi &= 
+	    \lim_{\xi \to \infty} F(\xi) - \lim_{\xi \to 0} F(\xi) \\
+	&= \frac{-\pi \sin\left(\sqrt{a} x\right)}{2 \sqrt{a}} - \frac{\cos\left(\sqrt{a} x\right)}{2\sqrt{a}}\left(\mathrm{Ci}\left(-x\sqrt{a}\right) - \mathrm{Ci}\left(\sqrt{a}x\right)\right).
+\end{align}
+Noting the identities
+\begin{align}
+	\mathrm{Ci}(-ax) - \mathrm{Ci}(ax) &= \log(-a x) - \log(a x), \\
+	\mathrm{Ci}(-ax) - \mathrm{Ci}(ax) &= i\pi \quad \forall \quad a,x > 0,
+\end{align}
+we can reduce the integral further to
+\begin{align}
+	\int_0^{\infty} \! \frac{\cos(\xi x)}{\xi^2 - a} \mathrm{d}\xi &= 
+	-\frac{\pi}{2\sqrt{a}}\left(\sin\left(\sqrt{a} x\right) + i\cos\left(\sqrt{a} x\right)\right). \label{eq_cos_integral_complex_form}
+\end{align}
+It is instructive to note that this is equivalent to the Fourier transform of
+$\frac{1}{\xi^2 - a}$, i.e.,
+\begin{align}
+	\int_0^\infty \! \frac{\cos(x \xi)}{\xi^2 - a} \mathrm{d}\xi
+	    &= -\frac{i \pi e^{-i\sqrt{a}|x|}}{2\sqrt{a}}.
+\end{align}
+Taking the principal value as the real part of the limit as $a \to 0^+$ reveals:
+\begin{align}
+	\lim_{a \to 0^+} \int_0^{\infty} \frac{\cos(x \xi)}{\xi^2 - a} \mathrm{d}\xi 
+	&= -\frac{\pi}{2} \lim_{a \to 0^+} \mathfrak{Re} \left\{ \frac{i e^{-i\sqrt{a}|x|}}{\sqrt{a}}\right\} \\
+	&= -\frac{\pi}{2\sqrt{a}} \lim_{a \to 0^+} \mathfrak{Re}  \left\{ \sin\left(\sqrt{a}|x|\right) + i\cos\left(\sqrt{a}|x|\right)\right\} \\
+	&= -\frac{\pi}{2\sqrt{a}} \lim_{a \to 0^+} \sin\left(\sqrt{a}|x|\right) \\
+	&= -\frac{\pi}{2}|x|,
+\end{align}
+which gives the desired identity
+\begin{align}
+	\mathrm{P.V.} \left\{-\frac{2}{\pi} \int_{0}^{\infty} \! \frac{\cos(x \xi)}{\xi^2} \mathrm{d}\xi \right\} = |x|.
+\end{align}
+

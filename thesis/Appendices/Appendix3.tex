@@ -1,0 +1,246 @@
+\section{Detailed Derivations of the Expansions}
+\label{appendix_expansions_detail}
+Here we present a full derivation of the expansion results
+presented in Chapter
+\ref{chapter_improved_expansions}.  We start by solving a useful
+integral and then show the steps by which each expansion formula
+is derived from its integral form by taking the limits of the
+anti-derivative at its bounds.
+
+\subsection{A Useful Integral}
+The equations
+for the coefficients of the improved
+expansions follow from the integral
+$
+\int \!
+\xi^j\csch\left(\frac{\pi}{2}\xi\right)
+\mathrm{d}\xi,
+$
+and the trivially more general integral
+$
+\int \! \xi^j \sech(a \xi + b) d\xi.
+$
+Which are related through
+$
+\sech\left(a\xi + \frac{i \pi}{2}\right) = -i \csch(a\xi).
+$
+Starting with repeated integration by parts
+\begin{align}
+	\begin{split}
+		&\int \! \xi^j \sech(a\xi + b) d\xi =
+		(-1)^j \int \! \frac{\partial^j}{\partial \xi^j} \xi^j \left(
+		\underbrace{\int \! \mathrm{d\xi} \, \cdots \int \! \mathrm{d\xi}}_{j}
+		\sech(a\xi + b) \right) \mathrm{d}\xi \\
+		&\quad\quad\quad\quad + \sum_{k=0}^{j-1} (-1)^k \frac{\partial^k}{\partial \xi^k}\xi^{j}
+		\frac{\partial^{j-k-1}}{\partial\xi^{j-k-1}}
+		\underbrace{\int \! \mathrm{d\xi} \, \cdots \int \! \mathrm{d\xi}}_{j}
+		\sech(a\xi + b).
+		\label{eq_ibp_sech}
+	\end{split}
+\end{align}
+Repeated differentiation of the hyperbolics is presented
+in full generality by \cite{qureshi_successive_2019}.  Here we
+employ a simpler formula for repeated integration revealed by
+expressing $\sech(a\xi + b)$ in terms of the polylogarithms:
+\begin{align}
+	\underbrace{\int \! \mathrm{d\xi} \, \cdots \int \! \mathrm{d\xi}}_{j}
+	\sech(a\xi + b) =
+	\frac{i (-1)^j}{a^j}\left(
+	\polylog_j\left(-i e^{-a\xi + b}\right)
+	- \polylog_j\left(i e^{-a\xi - b}\right)
+	\right).
+\end{align}
+Applying to (\ref{eq_ibp_sech}) yields
+the useful intermediate result
+\begin{align}
+	\int \! \xi^j \sech(a\xi + b) \mathrm{d}\xi =
+	-\frac{2}{a} \sum_{k=0}^j \frac{j! \xi^{j-k}
+		\mathrm{Ti}_{k+1}(e^{-a\xi -b})}{a^k (j-k)!}.
+\end{align}
+Here $\mathrm{Ti}_s(z)$ denotes the Inverse Tangent Integral, defined by
+\mbox{$
+	\mathrm{Ti}_s(z) = 
+	\frac{1}{2i}
+	\left( \polylog_s(i z) - \polylog_s(-i z) \right).
+	$}  Noting the relationship
+\mbox{$i\mathrm{Ti}_s(-iz) = \chi_s(z)$} and the relationship
+between $\csch(z)$ and $\sech(z)$ reveals
+\begin{align}
+	\int \xi^j \csch(a \xi) \mathrm{d} \xi
+	= -\frac{2}{a}\sum_{k=0}^{j}
+	\frac{j! \xi^{j-k} \chi_{k+1}(e^{-a\xi})}{a^k (j-k)!}.
+\end{align}
+
+
+\subsection{Hyperbolic Secant}
+The expression for the coefficients $S_{2m}(M)$
+then follows directly from (\ref{eq_alpha_coef_general_form}).
+The integral is evaluated to the bound $\sigma$ corresponding to
+the kernel $\cos(\xi v)$ such that
+\begin{align}
+	S_{2m}(M) &= \frac{(-1)^m v^{2m}}{(2m)!}
+	            \int_0^{\sigma} \! \xi^{2m} \sech\left(\frac{\pi}{2}\xi\right)
+	            \mathrm{d}\xi \\
+	          &= \frac{(-1)^m v^{2m}}{(2m)!}
+	          \left(
+	          \Lambda_{2m}(\sigma) - \Lambda_{2m}(0)
+	          \right), \\
+	\Lambda_j(\xi) &= -\frac{2}{a}\sum_{k=0}^{j}
+	\frac{j! \xi^{j-k} \mathrm{Ti}_{k+1}(e^{-a\xi})}{a^k (j-k)!},\quad a = \frac{\pi}{2}.\nonumber
+\end{align}
+First, note that for the bound at $\xi = 0$ the $\xi^{j-k}$ term
+is only non-zero for $k = j$ such that only the $k=j$ term contributes
+to the sum for $\xi=0$. 
+Evaluating $\Lambda_j(\xi)$ at $\xi=0$ yields
+\begin{align}
+	\Lambda_{2m}(0) &= \frac{2^{2m+2}(2m)!\mathrm{Ti}_{2m+1}(1)}{\pi^{2m+1}}.
+\end{align}
+Then note that
+\begin{align}
+	\mathrm{Ti}_{2m+1}(1) &= \frac{1}{2i}\left(
+	    \polylog_{2m+1}(i) - \polylog_{2m+1}(-i)
+	\right) \\
+	&= \frac{1}{2i}\left(
+	    2^{-2m-1}\eta(2m+1) + i\beta(2m+1)
+	        -2^{-2m-1}\eta(2m+1) + i\beta(2m+1)
+	\right) \\
+	&= \beta(2m+1) \\
+	&= \frac{(-1)^mE_{2m}\pi^{2m+1}}{4^{m+1}(2m)!}
+\end{align}
+reveals
+\begin{align}
+	\int_0^{\sigma} \! \xi^{2m}\sech\left(\frac{\pi}{2}\xi\right) \mathrm{d}\xi
+	    = -\frac{4 (2m)!}{\pi} \sum_{k=0}{2m}
+	            \frac{\sigma^{2m-k} \mathrm{Ti}_{k+1}\left(e^{\frac{\pi\sigma}{2}}\right)}{\pi^k (2m-k)!}
+	            + (-1)^m E_{2m}.
+\end{align}
+In the formulas above, $\eta(s)$ and $\beta(s)$ denote the Dirichlet eta and beta functions.
+Simplifying the result reveals the formula for the coefficients
+\begin{align}
+	S_{2m}(M) =
+	    \frac{E_{2m}}{(2m)!}
+	    + \frac{(-1)^{m+1}4}{\pi}
+	      \sum_{k=0}^{2m}
+	      \frac{2^k \sigma^{2m-k} \mathrm{Ti}_{k+1}\left(e^{\frac{\pi\sigma}{2}}\right)}
+	           {\pi^k (2m-k)!}.
+\end{align}
+
+
+\subsection{Hyperbolic Tangent}
+The expression for the coefficients $T_{2m+1}(M)$
+follows directly from
+(\ref{eq_alpha_coef_general_form}).  The integral is
+evaluated to the bound $\tau$ corresponding to the kernel
+$\sin(\xi v)$ such that
+\begin{align}
+	T_{2m+1} &= \frac{(-1)^m}{(2m+1)!}
+	\int_0^{\tau} \xi^{2m+1} \csch\left(\frac{\pi}{2} \xi\right) \mathrm{d}\xi \\
+	&=\frac{(-1)^m}{(2m+1)!}\left(
+	\Lambda_{2m+1}(\tau) - \lim_{\varepsilon \to 0} \Lambda_{2m+1}(\varepsilon)
+	\right), \\
+	\Lambda_j(\xi) &= -\frac{2}{a}\sum_{k=0}^{j}
+	\frac{j! \xi^{j-k} \chi_{k+1}(e^{-a\xi})}{a^k (j-k)!},\quad a = \frac{\pi}{2}.\nonumber
+\end{align}
+Noting that
+\begin{align}
+	\frac{1}{2} \lim_{\xi \to 0} \xi^{j-k}
+	\polylog_{k+1}\left(e^{\frac{-\pi\xi}{2}}\right)
+	&= \begin{cases} 
+		\frac{1}{2} \zeta(k+1) & j = k \\
+		0 & j \neq k,
+	\end{cases}
+	\\
+	\frac{1}{2} \lim_{\xi \to 0} \xi^{j-k}
+	\polylog_{k+1}\left(-e^{\frac{-\pi\xi}{2}}\right)
+	&= \begin{cases} 
+		\frac{1}{2} (2^{-k}-1) \zeta(k+1) & j = k \\
+		0 & j \neq k,
+	\end{cases}
+\end{align}
+and the relation,
+$\zeta(2m) = (-1)^{m+1}(2\pi)^{2m}B_{2m}(2(2m)!)^{-1}$,
+between the Riemann Zeta function and the Bernoulli
+numbers yields the result of (\ref{eq_xi_csch_solution}):
+\begin{align*}
+	T_{2m+1}(M) = \frac{2^{2m+1}(4^{m+1}-1)B_{2m+2}}{(m+1)(2m+1)!}
+	+ \frac{(-1)^{m+1}4}{\pi} \sum_{k=0}^{2m+1}
+	\frac{2^k \tau^{2m+1-k}
+		\chi_{k+1}\left(e^{-\frac{\pi \tau}{2}}\right)}
+	{\pi^{k}(2m+1-k)!}.
+	\label{eq_xi_csch_solution}
+\end{align*}
+
+\subsection{Hyperbolic Secant Squared}
+The expression for the coefficients $U_{2m}(M)$
+follows directly from
+(\ref{eq_alpha_coef_general_form}).  The integral is
+evaluated to the bound $\sigma$ corresponding to the kernel
+$\cos(\xi v)$ such that
+\begin{align}
+	U_{2m} &= \frac{(-1)^m}{(2m)!}
+	\int_0^{\tau} \xi^{2m+1} \csch\left(\frac{\pi}{2} \xi\right) \mathrm{d}\xi \\
+	&=\frac{(-1)^m}{(2m)!}\left(
+	\Lambda_{2m+1}(\sigma) - \lim_{\varepsilon \to 0} \Lambda_{2m+1}(\varepsilon)
+	\right), \\
+	\Lambda_j(\xi) &= -\frac{2}{a}\sum_{k=0}^{j}
+	\frac{j! \xi^{j-k} \chi_{k+1}(e^{-a\xi})}{a^k (j-k)!},\quad a = \frac{\pi}{2}.\nonumber
+\end{align}
+Evaluating $\lim_{\varepsilon \to 0} \Lambda_{2m+1}(\varepsilon)$ and noting, as above,
+that $\xi^{2m-k+1} = 1\ \forall\ \xi = 0, 2m+1-k = 0$ yields:
+\begin{align}
+	\lim_{\varepsilon \to 0} \Lambda_{2m+1}(\varepsilon) 
+	    &= \lim_{\varepsilon \to 0} \frac{4}{\pi}
+	        \sum_{k=0}^{2m+1} \frac{2^k \varepsilon^{2m+1-k}
+	        	\chi_{2m+2}\left(e^{-\frac{\pi \varepsilon}{2}}\right)}
+	        {\pi^{k}(2m+1-k)!} \\
+	    &= \frac{4}{\pi}
+	       \left(\frac{2^{2m+1}(2m+1)!\chi_{k+1}(1)}{\pi^k (2m-k+1)!}\right),\ \ k = 2m+1 \\
+	    &= \frac{2^{2m+3}(2m+1)!\chi_{2m+2}(1)}{\pi^{2m+2}}.
+\end{align}
+Note further that $\chi_s(1)$ can be simplified via
+\begin{align}
+	\chi_s(1) = \frac{1}{2}\zeta(s) - \frac{1}{2}\left(2^{-(s-1)}-1\right)\zeta(s)
+\end{align}
+which implies that
+\begin{align}
+	\chi_{2m+2}(1) = \frac{1}{2}\zeta(2m+2) - \frac{1}{2}\left(2^{-2m-1}-1\right)\zeta(2m+2).
+\end{align}
+Note that the Riemann Zeta function of even arguments can be reduced using
+\begin{align}
+	\zeta(2n) = \frac{(-1)^{n+1}(2\pi)^{2n}B_{2n}}{2(2n)!}
+\end{align}
+which implies
+\begin{align}
+\zeta(2m+2) = \frac{(-1)^{m+2}(2\pi)^{2m+2}B_{2m+2}}{2(2m+2)!}
+\end{align}
+which further implies
+\begin{align}
+\chi_{2m+2}(1) &= \frac{1}{2}\zeta(2m+2) - \frac{1}{2}(2^{-2m-1}-1)\zeta(2m+2) \\
+               &= \frac{1}{2}\left(1 - \left(2^{-2m-1}-1\right)\right)\zeta(2m+2) \\
+               &= \frac{1}{2}\left(1 - \left(2^{-2m-1}-1\right)\right)
+                  \frac{(-1)^{m+2}(2\pi)^{2m+2}B_{2m+2}}{2(2m+2)!}.
+\end{align}
+Returning to the limit $\lim_{\varepsilon \to 0} \Lambda_{2m+1}(\varepsilon)$ we can
+now further reduce the expression to
+\begin{align}
+	\lim_{\varepsilon \to 0} \Lambda_{2m+1}(\varepsilon) 
+	    &= \frac{2^{4m+3}\left(1 - \left(2^{-2m-1}-1\right)\right)(-1)^{m+2} B_{2m+2}}
+	            {2m+2} \\
+	    &= \frac{(-1)^m 2^{2m+1} \left(4^{m+1} - 1\right) B_{2m+2}}{m+1}.
+\end{align}
+The definite integral can be solved via
+\begin{align}
+	&\int_0^\sigma \! \xi^{2m+1} \csch\left(\frac{\pi}{2}\xi\right) \mathrm{d}\xi \\
+	    &\quad = \frac{(-1)^m 2^{2m+1}(4^{m+1}-1)B_{2m+2}}{m+1}
+	        - \frac{4}{\pi} \sum_{k=0}^{2m+1}
+	            \frac{2^k(2m+1)!\sigma^{2m+1-k}\chi_{k+1}\left(e^{-\frac{\pi}{2}\sigma}\right)}
+	                 {\pi^k (2m+1-k)!}
+\end{align}
+to yield the coefficient formulas
+\begin{align}
+U_{2m}(M) = \frac{2^{2m+1}(4^{m+1}-1)B_{2m+2}}{(2m)!(m+1)}
++ \frac{(-1)^{m+1} 4 (2m+1)}{\pi} \sum_{k=0}^{2m+1}
+\frac{2^k\sigma^{2m+1-k}\chi_{k+1}\left(e^{-\frac{\pi}{2}\sigma}\right)}
+{\pi^k (2m+1-k)!}.
+\end{align}
+
