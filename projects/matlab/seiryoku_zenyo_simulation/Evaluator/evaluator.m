@@ -1,0 +1,147 @@
+%% Exploration of transcendental roots using the Evaluator
+%
+% @brief In this file, transcendental roots are explored using the
+%        "Evaluator" function
+%
+
+clc; clear; close all;
+
+working_dir = 'C:\Users\wildcat\Tension\Seiryoku_Zenyo_Matlab\Evaluator';
+
+%% Configuration
+plotting = true;
+
+%% Define the parameters of transcendental harmonic function (F)
+
+%  F = A_U.*sin(w_U.*t - phi_U) + A_T.*sin(w_T.*t - phi_T) - C;
+
+A_U = 1;
+w_U = 1;
+phi_U = 0;
+
+A_T = 1;
+w_T = 1.2;
+phi_T = 0;
+
+C = 0;
+
+%% Find out what the period (P) of F is
+
+P_U = 2*pi/w_U;
+P_T = 2*pi/w_T;
+
+[N_U, D_U] = rat(P_U);
+[N_T, D_T] = rat(P_T);
+
+lcm(D_U, D_T);
+gcd(N_U, N_T);
+
+P = lcm(N_U, N_T)/gcd(D_U, D_T);
+
+%% Set up a time axis
+
+t_min = 0;
+t_max = P;
+d_t   = 0.01;
+
+t = t_min-4*d_t:d_t:t_max+4*d_t;
+
+%% Define F wrt time
+
+F = A_U.*sin(w_U.*t - phi_U) + A_T.*sin(w_T.*t - phi_T) - C;
+
+%% Plot F
+if plotting == true
+    figure(1)
+    title('F(t)');
+    plot(t,F);
+    legend('F(t)');
+end
+
+%% Try to find everywhere F = 0
+
+% "Evaluate the equation F=0"
+% E{ F(t) = 0 } = F_{eval}(t)
+%
+% First we will deal with any zeros that are not sign changes.
+% Places where F changes from zero to non-zero theoretically are
+% considered sign changes by matlab.  However, because we are working in
+% discrete time, points where an extrema of F just touches the
+% horizontal axis may go unoticed, because these points do not exactly
+% evaluate to zero in discrete time.
+%
+% To find these zeros, we look for any point where F and F' are
+% approximately equal to 0.
+%
+% Now, a second pass is made to find everywhere that F changes sign.
+% This is done by considering gradient(sign(F)).  Whenever
+% the result non-zero, F crosses the horizontal axis.
+%
+% The union of the results of the first pass and the second pass gives
+% an array that is non-zero wherever F touches the horizonal axis.
+%
+% Because gradient(sign(F)) is also non-zero in points adjacent to the
+% points where F crosses the x axis, we have to use pattern matching to
+% remove these adjacent non-zero values.
+%
+% F_eval is converted to a string for pattern matching to avoid matlab
+% warnings about using strrep on numbers.
+%
+thresh = d_t/10;
+
+F_eval1 = (abs(F) < thresh & gradient(F) < thresh);
+
+F_eval2 = gradient(sign(F));
+F_eval2 = F_eval2~=0; % Matlab converts F_eval to boolean here
+
+F_eval = F_eval1 | F_eval2;
+
+F_eval_str = mat2str(F_eval);
+F_eval_str = strrep(F_eval_str, 'true true true', 'false true false');
+F_eval = str2num(strrep(F_eval_str, 'true true', 'true false'));
+
+i = find(F_eval==true);
+
+pt = t(i);
+py = F(i);
+
+if plotting == true
+    figure(2)
+    plot(t,F);
+    hold on
+    plot(pt, py, 'ro', 'MarkerSize', 16);
+    if ~isempty(F_eval)
+        stem(t,F_eval,'color','k');
+    end
+    legend('F(t)','Zeros','F_{eval}(t)');
+end
+
+%% Try to represent F_{eval} as a sum of Kronecker Combs
+
+% A Kronecker Comb is a periodic comb of Kroneker Deltas
+% http://en.wikipedia.org/wiki/Kronecker_delta#The_Kronecker_comb
+%
+% Delta_{N}[n] = sum delta[n - kN]
+%
+% Note: plot(fft(F_eval)); looks really cool!!! (Amanda Flowers)
+% It looks like amanda flowers are really surfaces, squished onto a plane
+%
+
+Kronecker_Delta_Path = sprintf('%s/Kronecker_Delta',working_dir);
+Plotting_Path        = sprintf('%s/Plotting',working_dir);
+addpath(Kronecker_Delta_Path);
+addpath(Plotting_Path);
+
+Kronecker_Combs = Kronecker_Comb(t,pt,repmat(P,1,length(pt)),d_t);
+
+if plotting == true
+    figure(3)
+    if ~isempty(F_eval)
+        stem(t,F_eval,'color','k');
+    end
+    hold on
+    multiplot(t,Kronecker_Combs,'stem');
+end
+
+
+

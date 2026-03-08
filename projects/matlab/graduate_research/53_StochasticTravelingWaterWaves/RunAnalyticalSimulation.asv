@@ -1,0 +1,30 @@
+function [k, u, u_bar, sech2_max_arg] = RunAnalyticalSimulation( ...
+    alpha, delta, ka, kb, dk, x_c, t_c, sech2_coefs, use_analytical)
+
+k = ka:dk:kb;
+
+% Compute u
+sech_arg = k*x_c - 4*k.^3*t_c + delta;
+u = 12/alpha*k.^2 .* sech(sech_arg).^2;
+
+% Compute the maximum argument to check that it is in the ROC
+sech2_max_arg = max(abs(sech_arg));
+
+% Compute u_bar analytically
+
+sum = 0;
+
+for idx = 1:2:length(sech2_coefs)
+    
+    j = idx - 1;
+    
+    if use_analytical
+        integral = compute_analytical_f_integral(ka, kb, j, x_c, t_c);
+        
+    term = sech2_coefs(idx)*integral;
+    sum = sum + term;
+end
+
+u_bar = 12/((kb-ka)*alpha)*sum;
+
+end

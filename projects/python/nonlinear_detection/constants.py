@@ -1,0 +1,1 @@
+c_speed_of_light_mps = 299792458

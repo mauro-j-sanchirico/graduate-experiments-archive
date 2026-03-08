@@ -1,0 +1,9 @@
+function integral = ComputeCshrAnalytical( ...
+    lower_bound, upper_bound, j, a)
+
+integral = ...
+    ComputeHypergeomAntiderivative(j, a, exp(a*upper_bound)-1i*pi/2) ...
+  - ComputeHypergeomAntiderivative(j, a, exp(a*lower_bound)-1i*pi/2);
+
+end
+

@@ -1,0 +1,46 @@
+%% ComputeAlphaSechExpansionCoefs
+%
+% @breif Computes the expansion coefficient alpha giving a modified
+% expansion of the hyperbolic secant
+%
+% @param[in] number_terms_big_m - the number of partial sum terms to use
+% in the expansion.
+%
+% @param[in] epsilon - The near zero value to evaluate the limit as the
+% Eta antiderivative's argument approaches zero.
+%
+% @param[in] max_v - the maximum value expected at the input to the
+% activation function, i.e. the max of the signal "v"
+%
+% @param[in] rho_table - the table to lookup rho values in.  Use
+% rho_table = [] to estimate rho using a heuristic.
+%
+% @param[in] numerical_integral_flag - uses numerical methods to compute
+% integral when set to true, otherwise, uses the analytical method.
+% Numerical integration is often faster and more accurate since the
+% analytical method involves dividing large numbers.
+%
+% @returns alpha_coefs - the vector of coefficients which can be used in
+% the modified expansion to the hyperbolic secant.
+%
+
+function alpha_coefs = ComputeAlphaSechExpansionCoefs( ...
+    number_terms_big_m, epsilon, dxi, max_v, ...
+    rho_table, numerical_integral_flag)
+
+alpha_coefs = zeros(1, number_terms_big_m);
+
+for m_index = 0:number_terms_big_m-1
+    
+    fprintf('Computing alpha sech coef. %i/%i\n', ...
+        m_index, number_terms_big_m);
+    
+    j_index = 2*m_index;
+    alpha_coefs(m_index+1) = ComputeAlphaSechExpansionCoef( ...
+       j_index, number_terms_big_m, ...
+       epsilon, dxi, max_v, rho_table, numerical_integral_flag);
+    
+end
+
+end
+

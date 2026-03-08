@@ -1,0 +1,55 @@
+Ratios in order:
+1/1
+2/1
+3/2
+5/4
+9/8
+11/8
+13/8
+15/8
+7/4
+>> temp
+
+temp =
+
+  Columns 1 through 3
+
+    4.0781    2.3935    2.3935
+
+  Columns 4 through 6
+
+    2.3935    2.3935    2.3939
+
+  Columns 7 through 9
+
+    2.3935    2.3935    2.3935
+
+  Column 10
+
+    2.4004
+
+
+for freqs vector:
+
+freqs = [1 9/8 5/4 11/8 4/3 3/2 13/8 7/4 15/8 2];
+
+Sorted Seiryoku Zenyo values for freqs vector:
+
+1/1  ==>  4.0780506072902529000
+2/1  ==>  2.4004295544673471000
+3/2  ==>  2.3939044976005053000
+5/4  ==>  2.3934991316687011000
+4/3  ==>  2.3934794019680155000
+9/8  ==>  2.3934773018896385000
+11/8 ==>  2.3934712289850850000
+13/8 ==>  2.3934710512292101000
+15/8 ==>  2.3934703370926980000
+7/4  ==>  2.3934699640672279000
+
+Results get more accurate as the resolution for the frequency and phase curves increases.
+
+Notice very small differences are significant for deriving the correct order!
+
+Exact solutions are required to derive the pitch space from the SZ concept.
+
+

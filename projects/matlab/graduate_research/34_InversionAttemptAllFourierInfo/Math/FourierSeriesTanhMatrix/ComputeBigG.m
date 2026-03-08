@@ -1,0 +1,9 @@
+function big_g = ComputeBigG( ...
+    j_index, k_index, gamma10_layer0, gamma11_layer0, gamma11_layer1)
+
+big_g = gamma11_layer1 ...
+       *gamma11_layer0^k_index ...
+       *gamma10_layer0^(j_index-k_index);
+
+end
+

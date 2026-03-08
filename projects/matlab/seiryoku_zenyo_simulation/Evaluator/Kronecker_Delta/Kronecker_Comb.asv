@@ -1,0 +1,23 @@
+% Kronecker Comb function
+% Generates several Kronecker Combs (depending on the size of the P array)
+% with different stretch and shift.  Assumes 'Out' parameter is already
+% initialized.  Assumes P and phi arrays are the same size.
+
+function Kronecker_Combs = Kronecker_Comb(t, phi, P, thresh)
+for i=1:length(phi)
+    Kronecker_Combs = zeros(length(t),length(P))
+    Kronecker_Combs(:,i) = [mod(t-phi(i),P(i))<thresh]';
+end
+end
+
+% Kronecker Delta function
+% The Kronecker Delta is 1 when its argument is zero, and zero otherwise.
+% This function generats several shifted Kronecker Deltas.  The number
+% of Kronecker Deltas created is determined by the number of elements
+% in the phi array.
+%
+function delta = Kronecker_Delta(t, phi)
+for i=1:length(phi)
+    delta(:,i) = (t-phi == 0)
+end
+end

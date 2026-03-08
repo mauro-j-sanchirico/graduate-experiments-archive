@@ -1,0 +1,391 @@
+%% Created by Maple 16.00, Windows 7
+%% Source Worksheet: division_mapping.mw
+%% Generated: Tue Oct 21 23:19:07 EDT 2014
+\documentclass{article}
+\usepackage{maplestd2e}
+\def\emptyline{\vspace{12pt}}
+\begin{document}
+\pagestyle{empty}
+\DefineParaStyle{Maple Heading 1}
+\DefineParaStyle{Maple Text Output}
+\DefineParaStyle{Maple Dash Item}
+\DefineParaStyle{Maple Bullet Item}
+\DefineParaStyle{Maple Normal}
+\DefineParaStyle{Maple Heading 4}
+\DefineParaStyle{Maple Heading 3}
+\DefineParaStyle{Maple Heading 2}
+\DefineParaStyle{Maple Warning}
+\DefineParaStyle{Maple Title}
+\DefineParaStyle{Maple Error}
+\DefineCharStyle{Maple Hyperlink}
+\DefineCharStyle{Maple 2D Math}
+\DefineCharStyle{Maple Maple Input}
+\DefineCharStyle{Maple 2D Output}
+\DefineCharStyle{Maple 2D Input}
+\section{\textbf{Division Mappings of Sets}}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+Mauro Sanchirico}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\subsection{\textbf{Definition}}
+Given a set\mapleinline{inert}{2d}{S}{$\displaystyle S$}
+, we divide each of its elements by some number\mapleinline{inert}{2d}{mu}{$\displaystyle \mu$}
+until they are all smaller than\mapleinline{inert}{2d}{mu}{$\displaystyle \mu$}
+.
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+D1-1. To compute\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(S)}{$\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( S \right) $}
+}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\textbf{For Each}element\mapleinline{inert}{2d}{s}{$\displaystyle s$}
+\mapleinline{inert}{2d}{Typesetting:-mrow(Typesetting:-mi("S", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("|", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "true", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.1111111em", rspace = "0.1111111em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mi("s", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("&isinv;", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mi("&rationals;", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mo(",", size = "14", mathvariant = "normal", fence = "false", separator = "true", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.3333333em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mi("s", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mo(",", size = "14", mathvariant = "normal", fence = "false", separator = "true", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.3333333em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo(">", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mn("0", size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"))}{$\displaystyle S \mathop{\rm  }\mid \mathop{\rm  }s \mathop{\rm  }\esisinv \mathop{\rm  }\esrationals ,\mathop{\rm  }\mathop{\rm  }s ,\mathop{\rm  }\mu \mathop{\rm  }>\mathop{\rm  }0\mathop{\rm  }$}
+}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\textbf{IF}\mapleinline{inert}{2d}{1 <= s and s < mu}{$\displaystyle 1\leq s{\rm \: \wedge \:}s<\mu$}
+}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\textbf{IF}\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(s)}{$\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( s \right) $}
+has not already been mapped to, include it in the target set}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\textbf{IF}\mapleinline{inert}{2d}{s < 1}{$\displaystyle s<1$}
+}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+Multiply\mapleinline{inert}{2d}{s}{$\displaystyle s$}
+by\mapleinline{inert}{2d}{mu}{$\displaystyle \mu$}
+\textbf{Until}\mapleinline{inert}{2d}{s}{$\displaystyle s$}
+lies inside\mapleinline{inert}{2d}{RealRange(1, Open(mu))}{$\displaystyle {\it RealRange} \left( 1,{\it Open} \left( \mu \right)  \right) $}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\textbf{IF}\mapleinline{inert}{2d}{s >= mu}{$\displaystyle \mu\leq s$}
+}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+Divide\mapleinline{inert}{2d}{s}{$\displaystyle s$}
+by\mapleinline{inert}{2d}{mu}{$\displaystyle \mu$}
+\textbf{Until}\mapleinline{inert}{2d}{s}{$\displaystyle s$}
+lies inside\mapleinline{inert}{2d}{RealRange(1, Open(mu))}{$\displaystyle {\it RealRange} \left( 1,{\it Open} \left( \mu \right)  \right) $}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+To express this algorithm as an equation, note that the number of multiplications or divisions by\mapleinline{inert}{2d}{mu}{$\displaystyle \mu$}
+required is determined by\mapleinline{inert}{2d}{[`#msub(mi("log",fontstyle = "normal"),mi("&mu;",fontstyle = "normal"))`(s)]}{$\displaystyle [\mbox {{\tt `\#msub(mi("log",fontstyle = "normal"),mi("`}}\\
+\mbox{}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{} \left( s \right) ]$}
+, where square brackets denote the floor function.}\end{Maple Normal}
+
+\begin{Maple Normal}{
+, where square brackets denote the floor function.}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+D1-2.}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{}{\[\displaystyle \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("&Dfr;", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mrow(Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mi("x", size = "14", italic = "true", mathvariant = "italic")), size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mfrac(Typesetting:-mrow(Typesetting:-mi("x", size = "14", italic = "true", mathvariant = "italic")), Typesetting:-mrow(Typesetting:-msup(Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("log", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mi("x", size = "14", italic = "true", mathvariant = "italic")), size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal", open = "[", close = "]")), superscriptshift = "0")), linethickness = "1", denomalign = "center", numalign = "center", bevelled = "false"), Typesetting:-mo(",", size = "14", mathvariant = "normal", fence = "false", separator = "true", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.3333333em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mi("x", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mo(",", size = "14", mathvariant = "normal", fence = "false", separator = "true", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.3333333em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo(">", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mn("0", size = "14", mathvariant = "normal"))}{\[\displaystyle \esDfr _{\mu }\left(x \right)\mathop{\rm  }=\mathop{\rm  }\frac{x }{\mu ^{\left(\mathop{\rm log}_{\mu }\left(x \right)\right)}},\mathop{\rm  }\mathop{\rm  }\mathop{\rm  }\mathop{\rm  }x ,\mathop{\rm  }\mu \mathop{\rm  }>\mathop{\rm  }0\]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\textbf{}\textbf{}\subsection{\textbf{Properties}}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+P1-1)\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`}{$\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}$}
+is idempotent.}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(s) = `#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(s)) and `#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(s)) = `&Dfr;`[mu](s)^n}{\[\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( s \right) =\mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( s \right)  \right) {\rm \: \wedge \:}\mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( s \right)  \right) = \left( \mbox {{\tt `\&Dfr;`}}_{{\mu}} \left( s \right)  \right) ^{n}\]}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+P1-2)\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`}{$\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}$}
+of any integer power of\mapleinline{inert}{2d}{mu}{$\displaystyle \mu$}
+is equal to 1.}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("&Dfr;", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mrow(Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-msup(Typesetting:-mi("&mu;", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mi("n", size = "14", italic = "true", mathvariant = "italic")), superscriptshift = "0")), size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mn("1", size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("&ForAll;", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.2777778em"), Typesetting:-mi("n", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mo("&Element;", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mi("&naturals;", size = "14", italic = "true", mathvariant = "italic"))}{\[\displaystyle \esDfr _{\mu }\left(\mu ^{n }\right)\mathop{\rm  }=\mathop{\rm  }1\mathop{\rm  }\forall n \esElement \esnaturals \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(1) = 1}{\[\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( 1 \right) =1\]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+P1-3)\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mi("&mu;",fontstyle = "normal"))`(0)}{$\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mi("`}}\mu \mbox {{\tt `",fontstyle = "normal"))`}}\\
+\mbox{}\\
+\mbox{} \left( 0 \right) $}
+is undefined.}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\subsection{\textbf{Trivial Examples}}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{}{\[\displaystyle \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+E1-1)}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\mapleinline{inert}{2d}{Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("&Dfr;", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mn("3", size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mfrac(Typesetting:-mn("3", size = "14", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-msup(Typesetting:-mn("2", size = "14", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("log", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal", open = "[", close = "]")), superscriptshift = "0"), Typesetting:-mi("")), linethickness = "1", denomalign = "center", numalign = "center", bevelled = "false"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mfrac(Typesetting:-mn("3", size = "14", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), linethickness = "1", denomalign = "center", numalign = "center", bevelled = "false"))}{\[\displaystyle \esDfr _{2}\left(3\right)\mathop{\rm  }=\mathop{\rm  }\frac{3}{2^{\left(\mathop{\rm log}_{2}\left(2\right)\right)}}=\mathop{\rm  }\frac{3}{2}\]}
+\textbf{}\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+E1-2)}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\mapleinline{inert}{2d}{Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("&Dfr;", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mn("7", size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mfrac(Typesetting:-mrow(Typesetting:-mn("7", size = "14", mathvariant = "normal")), Typesetting:-mrow(Typesetting:-msup(Typesetting:-mn("2", size = "14", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("log", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mn("7", size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal", open = "[", close = "]")), superscriptshift = "0")), linethickness = "1", denomalign = "center", numalign = "center", bevelled = "false"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mfrac(Typesetting:-mn("7", size = "14", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mn("4", size = "14", mathvariant = "normal")), linethickness = "1", denomalign = "center", numalign = "center", bevelled = "false"))}{\[\displaystyle \esDfr _{2}\left(7\right)\mathop{\rm  }=\mathop{\rm  }\frac{7}{2^{\left(\mathop{\rm log}_{2}\left(7\right)\right)}}=\mathop{\rm  }\frac{7}{4}\]}
+\textbf{}\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+E1-3)}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mn("2"))`({1, 2, 3}) = {1, 3/2}}{\[\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mn("2"))`}}\\
+\mbox{} \left(  \left\{ 1,2,3 \right\}  \right) = \left\{ 1,3/2 \right\} \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+E1-4)}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mn("2"))`({1/2, 1/4, 1/7}) = {1, 8/7}}{\[\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mn("2"))`}}\\
+\mbox{} \left(  \left\{ 1/2,1/4,1/7 \right\}  \right) = \left\{ 1,{\frac {8}{7}} \right\} \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\subsection{\textbf{Interesting Examples}}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{}{\[\displaystyle \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+E2-1)}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{`#msub(mi("&Dfr;"),mn("2"))`(nonnegint) = {1, 3/2, 5/4, 7/4, 9/8, 2*(1/2), 4*(1/4), 6*(1/4), 8*(1/8), () .. ()} and {1, 3/2, 5/4, 7/4, 9/8, 2*(1/2), 4*(1/4), 6*(1/4), 8*(1/8), () .. ()} = {1, 3/2, 5/4, 7/4, 9/8, () .. ()}}{\[\displaystyle \mbox {{\tt `\#msub(mi("`}}\mbox {{\tt `\&Dfr;`}}\\
+\mbox{}\mbox {{\tt `"),mn("2"))`}}\\
+\mbox{} \left( {\it nonnegint} \right) = \left\{ 1,3/2,5/4,7/4,{\frac {9}{8}},{\ldots }\\
+\mbox{} \right\} {\rm \: \wedge \:} \left\{ 1,3/2,5/4,7/4,{\frac {9}{8}},{\ldots } \right\} = \left\{ 1,3/2,5/4,7/4\\
+\mbox{},{\frac {9}{8}},{\ldots } \right\} \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+E2-2)}\end{Maple Normal}
+
+}\end{Maple Normal}
+
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("&Dfr;", size = "14", italic = "true", mathvariant = "italic"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mi("&reals;", size = "14", italic = "true", mathvariant = "italic")), size = "14", mathvariant = "normal"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mo("=", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.2777778em", rspace = "0.2777778em"), Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mrow(Typesetting:-mo(" ", size = "14", mathvariant = "normal", fence = "false", separator = "false", stretchy = "false", symmetric = "false", largeop = "false", movablelimits = "false", accent = "false", lspace = "0.0em", rspace = "0.0em"), Typesetting:-mfrac(Typesetting:-mrow(Typesetting:-mi("x", size = "14", italic = "true", mathvariant = "italic")), Typesetting:-mrow(Typesetting:-msup(Typesetting:-mn("2", size = "14", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-msub(Typesetting:-mi("log", size = "14", italic = "false", mathvariant = "normal"), Typesetting:-mrow(Typesetting:-mn("2", size = "14", mathvariant = "normal")), subscriptshift = "0", Typesetting:-msemantics = "atomic"), Typesetting:-mfenced(Typesetting:-mrow(Typesetting:-mi("x", size = "14", italic = "true", mathvariant = "italic")), size = "14", mathvariant = "normal")), size = "14", mathvariant = "normal", open = "[", close = "]")), superscriptshift = "0")), linethickness = "1", denomalign = "center", numalign = "center", bevelled = "false")), Typesetting:-mi(""))}{\[\displaystyle \esDfr _{2}\left(\esreals \right)\mathop{\rm  }=\mathop{\rm  }\mathop{\rm  }\frac{x }{2^{\left(\mathop{\rm log}_{2}\left(x \right)\right)}}\]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{}{\[\displaystyle \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleplot{division_mappingplot2d1.eps}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{}{\[\displaystyle \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\begin{Maple Normal}{
+\begin{Maple Normal}{
+\mapleinline{inert}{2d}{}{\[\displaystyle \]}
+}\end{Maple Normal}
+}\end{Maple Normal}
+\end{document}

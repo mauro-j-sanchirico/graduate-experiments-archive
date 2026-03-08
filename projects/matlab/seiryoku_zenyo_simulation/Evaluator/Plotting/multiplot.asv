@@ -1,0 +1,15 @@
+% Assumes that t is a time array:
+% 
+% t = [ 1 2 3 4 5 6 ... ]
+%
+% Assumes F is a vertical function table with multiple colums
+%
+% F = [ 
+% FA1    FB1
+% FA2    FB2
+% FA3
+function multiplot(t F)
+
+
+end
+

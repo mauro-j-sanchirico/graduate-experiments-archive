@@ -1,0 +1,6 @@
+function big_h_max = ComputeHMax(k, x)
+
+L = 2*pi/k;
+h_max = 0.142*L*tanh(k*d) 
+
+end

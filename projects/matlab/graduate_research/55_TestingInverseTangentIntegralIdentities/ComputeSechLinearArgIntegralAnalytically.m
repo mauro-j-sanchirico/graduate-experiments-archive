@@ -1,0 +1,9 @@
+function integral = ComputeSechLinearArgIntegralAnalytically( ...
+    a, b, j, x0, x1)
+
+integral = ...
+    ComputeSechLinearArgAntiDeriv(a, b, j, x1) ...
+    - ComputeSechLinearArgAntiDeriv(a, b, j, x0);
+
+end
+

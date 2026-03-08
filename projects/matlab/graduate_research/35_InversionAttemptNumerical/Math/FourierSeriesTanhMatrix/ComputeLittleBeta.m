@@ -1,0 +1,13 @@
+function little_beta = ComputeLittleBeta( ...
+    j_index, k_index, ...
+    gamma10_layer0, gamma11_layer0, gamma11_layer1, ...
+    alpha_coefs)
+
+big_g = ComputeBigG( ...
+    j_index, k_index, gamma10_layer0, gamma11_layer0, gamma11_layer1);
+
+big_alpha = ComputeBigAlpha(j_index, k_index, alpha_coefs);
+
+little_beta = big_alpha*big_g;
+
+end

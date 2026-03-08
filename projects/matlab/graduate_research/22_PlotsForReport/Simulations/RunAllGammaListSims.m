@@ -1,0 +1,23 @@
+function [inputs, outputs] = RunAllGammaListSims()
+
+design_flags = GetDesignFlags();
+
+% Simulate truth for each gamma
+[inputs.y_truth, outputs.y_truth] = GetTrueOutputOverGammaList( ...
+    design_flags.x_interrogation, design_flags.all_gamma_list);
+
+% Simulate output using Taylor Series expansion
+[inputs.y_taylor_fourier, outputs.y_taylor_fourier] = ...
+    GetTaylorFourierOutputOverGammaList( ...
+        design_flags.x_interrogation, design_flags.small_gamma_list);
+
+% Simulate output using sum of exponentials expansion
+[inputs.y_exponential_fourier, outputs.y_exponential_fourier] = ...
+    GetExponentialFourierOutputOverGammaList( ...
+        design_flags.x_interrogation, design_flags.med_gamma_list);
+
+% Generate output using modified expansion
+[inputs.y_modified_fourier, outputs.y_modified_fourier] = ...
+    GetModifiedFourierOutputOverGammaList( ...
+        design_flags.x_interrogation, design_flags.all_gamma_list);
+end

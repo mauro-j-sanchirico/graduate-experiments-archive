@@ -1,0 +1,236 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ComputePsiTensor</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-03-29"><meta name="DC.source" content="ComputePsiTensor.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>ComputePsiTensor</h1><p>@breif Computes a tensor of all the coefficients of a multivariate polynomial expansion of a given neural network</p><p>@param[in] mlp_params - The MLP parameter struct</p><p>@param[in] alpha_coefs - The coefficients of the hyperbolic tangent expansion</p><p>@param[in] mi_table - Pre-computed table of multinomial indicies</p><p>@param[in] mc_table - Pre-computed table of multinomial coefficients</p><p>@returns psi_tensor - The tensor of all the psi values</p><pre class="codeinput"><span class="keyword">function</span> psi_tensor = ComputePsiTensor( <span class="keyword">...</span>
+    mlp_params, alpha_coefs, mi_table, mc_table)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="comment">% Get needed info</span>
+<span class="comment">% --------------------------------------------------------------------</span>
+m_expansion_params = GetModifiedExpansionParams();
+mlp_hyperparams = GetMLPHyperparams();
+big_ns = mlp_hyperparams.num_input + 1; <span class="comment">% Number of terms in sum</span>
+
+<span class="comment">% Flip to math ordering</span>
+alpha_coefs = fliplr(alpha_coefs);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="comment">% Initialize the psi tensor</span>
+<span class="comment">% --------------------------------------------------------------------</span>
+
+<span class="comment">% A hash table is used to keep track of psi tensor indicies to allow</span>
+<span class="comment">% for flexible hyperdimensional indexing</span>
+psi_tensor = containers.Map(<span class="string">'KeyType'</span>, <span class="string">'double'</span>, <span class="string">'ValueType'</span>, <span class="string">'double'</span>);
+
+<span class="keyword">for</span> nh = 1:mlp_hyperparams.num_hidden
+    <span class="keyword">for</span> m = 1:m_expansion_params.m_index_max
+        j = 2*m - 1;
+        <span class="keyword">for</span> k_idx = 1:length(mi_table{big_ns}{j})
+            <span class="comment">% Get the multi-index, k, and the multinomial coef, mc</span>
+            k = FastMultiIndex(mi_table, big_ns, j, k_idx);
+            <span class="comment">% Get a multi-index key for the hashmap</span>
+            k_key = GetMultiIndexKey(k);
+            psi_tensor(k_key) = 0;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% -------------------------------------------------------------------</span>
+<span class="comment">% Compute psi tensor elements</span>
+<span class="comment">% -------------------------------------------------------------------</span>
+<span class="keyword">for</span> nh = 1:mlp_hyperparams.num_hidden
+
+    <span class="comment">% Get terms of the sum that is to be raised to the power of m</span>
+    w = [mlp_params.w_layer0(nh, :) mlp_params.b_layer0(nh)];
+
+    <span class="keyword">for</span> m = 1:m_expansion_params.m_index_max
+
+        j = 2*m - 1;
+
+        <span class="keyword">for</span> k_idx = 1:length(mi_table{big_ns}{j})
+
+            <span class="comment">% Get the multi-index, k, and the multinomial coef, mc</span>
+            k = FastMultiIndex(mi_table, big_ns, j, k_idx);
+            mc = FastMultinomialCoef(mc_table, big_ns, j, k);
+
+            <span class="comment">% Get the alpha coef</span>
+            alpha_2m_minus_1 = alpha_coefs(2*m);
+
+            <span class="comment">% Compute the term to be added</span>
+            psi_tensor_element = <span class="keyword">...</span>
+                alpha_2m_minus_1 <span class="keyword">...</span>
+                * mc <span class="keyword">...</span>
+                * mlp_params.w_layer1(nh) <span class="keyword">...</span>
+                * ComputeMultiIndexPower(w',k);
+
+            <span class="comment">% Get a multi-index key for the hashmap</span>
+            k_key = GetMultiIndexKey(k);
+
+            <span class="comment">% Add the term</span>
+            psi_tensor(k_key) = psi_tensor(k_key) + psi_tensor_element;
+
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ComputePsiTensor
+%
+% @breif Computes a tensor of all the coefficients of a multivariate
+% polynomial expansion of a given neural network
+%
+% @param[in] mlp_params - The MLP parameter struct
+%
+% @param[in] alpha_coefs - The coefficients of the hyperbolic tangent
+% expansion
+%
+% @param[in] mi_table - Pre-computed table of multinomial indicies
+%
+% @param[in] mc_table - Pre-computed table of multinomial coefficients
+%
+% @returns psi_tensor - The tensor of all the psi values
+%
+
+function psi_tensor = ComputePsiTensor( ...
+    mlp_params, alpha_coefs, mi_table, mc_table)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Get needed info
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+m_expansion_params = GetModifiedExpansionParams();
+mlp_hyperparams = GetMLPHyperparams();
+big_ns = mlp_hyperparams.num_input + 1; % Number of terms in sum
+
+% Flip to math ordering
+alpha_coefs = fliplr(alpha_coefs);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Initialize the psi tensor
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+
+% A hash table is used to keep track of psi tensor indicies to allow
+% for flexible hyperdimensional indexing
+psi_tensor = containers.Map('KeyType', 'double', 'ValueType', 'double');
+
+for nh = 1:mlp_hyperparams.num_hidden
+    for m = 1:m_expansion_params.m_index_max
+        j = 2*m - 1;
+        for k_idx = 1:length(mi_table{big_ns}{j})
+            % Get the multi-index, k, and the multinomial coef, mc
+            k = FastMultiIndex(mi_table, big_ns, j, k_idx);
+            % Get a multi-index key for the hashmap
+            k_key = GetMultiIndexKey(k);
+            psi_tensor(k_key) = 0;
+        end
+    end
+end
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% Compute psi tensor elements
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+for nh = 1:mlp_hyperparams.num_hidden
+    
+    % Get terms of the sum that is to be raised to the power of m
+    w = [mlp_params.w_layer0(nh, :) mlp_params.b_layer0(nh)];
+    
+    for m = 1:m_expansion_params.m_index_max
+        
+        j = 2*m - 1;
+        
+        for k_idx = 1:length(mi_table{big_ns}{j})
+
+            % Get the multi-index, k, and the multinomial coef, mc
+            k = FastMultiIndex(mi_table, big_ns, j, k_idx);
+            mc = FastMultinomialCoef(mc_table, big_ns, j, k);
+
+            % Get the alpha coef
+            alpha_2m_minus_1 = alpha_coefs(2*m);
+
+            % Compute the term to be added
+            psi_tensor_element = ...
+                alpha_2m_minus_1 ...
+                * mc ...
+                * mlp_params.w_layer1(nh) ...
+                * ComputeMultiIndexPower(w',k);
+            
+            % Get a multi-index key for the hashmap
+            k_key = GetMultiIndexKey(k);
+            
+            % Add the term
+            psi_tensor(k_key) = psi_tensor(k_key) + psi_tensor_element;
+            
+        end
+    end
+end
+
+end
+
+##### SOURCE END #####
+--></body></html>
