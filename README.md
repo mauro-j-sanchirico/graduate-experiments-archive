@@ -65,7 +65,7 @@ The main code to reproduce results in the thesis is available in `projects/pytho
 
 ## Usage and Dependencies
 
-Maple worksheets (`.ws`) require [Maple](https://www.maplesoft.com/). Matlab scripts (`.m`) and Matlab Live notebooks (`.mlx`) require [Matlab](https://www.mathworks.com/products/matlab.html). Python modules and packages require Python 3.7 or higher. [TeXstudio](https://www.texstudio.org/) was used for TeX documents.
+Maple worksheets (`.ws`) require [Maple](https://www.maplesoft.com/). Maple worksheets can be viewed for free with [Maple Player](maplesoft.com/products/maple/Mapleplayer/). Matlab scripts (`.m`) and Matlab Live notebooks (`.mlx`) require [Matlab](https://www.mathworks.com/products/matlab.html). Python modules and packages require Python 3.7 or higher. [TeXstudio](https://www.texstudio.org/) was used for TeX documents.
 
 This work is archived and code here is not actively maintained, though the author is open to requests to collaborate on future work!
 
