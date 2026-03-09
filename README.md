@@ -1,6 +1,6 @@
 # Graduate Experiments Archive
 
-This is a personal monorepo for experimental code, academic examples, and prototypes written from 2012-2022 while performing research at Villanova University [Villanova Center for Analytics of Dynamic Systems (VCADS)](https://www.texstudio.org/). It is posted as an archived virtual notebook.
+This is a personal monorepo for experimental code, academic examples, and prototypes written from 2012-2022 while performing research at Villanova University's [Villanova Center for Analytics of Dynamic Systems (VCADS)](https://www.texstudio.org/). It is pushed here as an archived virtual notebook.
 
 Topics are eclectic but mostly cover mathematical analyses of nonlinear systems' responses to non-trivial excitations, including systems and excitations encountered music, sports, circuits, and neural networks. Most of this work culminated in a master's thesis available [here](https://github.com/mauro-j-sanchirico/graduate-experiments-archive/blob/main/thesis/main.pdf). Some of this work is summarized briefly in an IEEE Transactions on Neural Networks and Learning Systems (TNNLS) paper [here](https://ieeexplore.ieee.org/document/9650758). An ArXiv copy is available [here](https://arxiv.org/pdf/2007.06226).
 
